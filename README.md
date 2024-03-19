@@ -34,7 +34,7 @@ General Milestones
 -	Month 3: Finish all levels, make sure characters work well together, make satisfaction scoring
 -	Month 4: Make tutorial, polish design, and debug!
 
-Plan for Sprint 1:
+**Plan for Sprint 1:**
 - Get 2 players partially functional, and the server between the 2 working. 
 - Medha
     - slicing pizza
