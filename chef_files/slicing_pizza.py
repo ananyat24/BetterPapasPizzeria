@@ -1,5 +1,5 @@
 import pygame
-from chef import Chef
+from chef_files.chef import Chef
 from constants import Constants
 
 class SlicingPizza(Chef):
