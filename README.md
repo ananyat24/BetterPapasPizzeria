@@ -33,3 +33,18 @@ General Milestones
 -	Month 2: Start 3rd character, finish the first 2 characters 
 -	Month 3: Finish all levels, make sure characters work well together, make satisfaction scoring
 -	Month 4: Make tutorial, polish design, and debug!
+
+Plan for Sprint 1:
+- Get 2 players partially functional, and the server between the 2 working. 
+- Medha
+    - slicing pizza
+    - add toppings
+- Aarna
+    - finish understanding multiplayer functionality
+    - try linking waiter and chef to server - what the waiter writes down the chef gets 
+- Riddhi
+    - working on the sprite sheets
+    - player animations 
+- Ananya
+    - waiter functionality (taking orders, payments, can do more if time)
+    - finish all backgrounds for the game
