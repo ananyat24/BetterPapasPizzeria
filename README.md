@@ -47,4 +47,4 @@ General Milestones
     - player animations 
 - Ananya
     - waiter functionality (taking orders, payments, can do more if time)
-    - finish all backgrounds for the game
+    - finish all backgrounds for the game, connect the pages
