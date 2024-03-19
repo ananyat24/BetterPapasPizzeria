@@ -1,5 +1,5 @@
 import pygame
-from slicing_pizza import SlicingPizza
+from chef_files.slicing_pizza import SlicingPizza
 from constants import Constants
 
 # create the screen

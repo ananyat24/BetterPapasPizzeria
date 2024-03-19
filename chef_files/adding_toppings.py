@@ -1,7 +1,7 @@
 import pygame
-from chef import Chef
+from chef_files.chef import Chef
 from constants import Constants
-from topping import Topping
+from chef_files.topping import Topping
 
 class AddingToppings(Chef):
     
