@@ -70,7 +70,7 @@ def main():
 
         p2Pos = read_pos(n.send(make_pos((p.x, p.y))))
         p2.x = p2Pos[0]
-        p2.t = p2Pos[1]
+        p2.y = p2Pos[1]
         p2.update()
 
         for event in pygame.event.get():
@@ -79,6 +79,6 @@ def main():
                 pygame.quit()
 
         p.move()
-        redrawWindow(win, p)
+        redrawWindow(win, p, p2)
 
 main()
