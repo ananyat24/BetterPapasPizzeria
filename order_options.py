@@ -1,6 +1,6 @@
 import pygame
 import os
-import constants
+from constants import Constants
 import sys
 
 class orderOptions:
@@ -8,8 +8,9 @@ class orderOptions:
         pygame.init()
 
         # change to constants in class
-        self.WIDTH = 1350
-        self.HEIGHT = 765
+        self.c = Constants()
+        self.WIDTH = self.c.screen_width
+        self.HEIGHT = self.c.screen_height
 
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
         
@@ -27,29 +28,28 @@ class orderOptions:
 
     def setup(self):
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
+        self.bg = pygame.transform.scale(self.bg, (self.WIDTH, self.HEIGHT))
         self.screen.blit(self.bg, (0, 0))
 
-        self.toppingArea1 = pygame.Rect(1075, 210, 42, 42)
-        self.toppingArea2 = pygame.Rect(1075, 260, 42, 42)
-        self.toppingArea3 = pygame.Rect(1075, 310, 42, 42)
-        self.toppingArea4 = pygame.Rect(1075, 360, 42, 42)
-        self.toppingArea5 = pygame.Rect(1075, 410, 42, 42)
-        self.toppingArea6 = pygame.Rect(1075, 460, 42, 42)
-        self.toppingArea7 = pygame.Rect(1075, 510, 42, 42)
-        self.toppingArea8 = pygame.Rect(1075, 560, 42, 42)
+        self.toppingArea1 = pygame.Rect(780, 160, 42, 42)
+        self.toppingArea2 = pygame.Rect(780, 200, 42, 42)
+        self.toppingArea3 = pygame.Rect(780, 240, 42, 42)
+        self.toppingArea4 = pygame.Rect(780, 280, 42, 42)
+        self.toppingArea5 = pygame.Rect(780, 320, 42, 42)
+        self.toppingArea6 = pygame.Rect(780, 360, 42, 42)
+        self.toppingArea7 = pygame.Rect(780, 400, 42, 42)
 
-        # self.screen.blit(self.screen, self.toppingArea7)
+        # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.toppingArea7), 10)
 
     def toppingArea(self, x, y, click):
         self.TA = pygame.image.load(os.path.join("pictures", "toppingAreaImage.png"))
-        # self.screen.blit(self.TA, (1000, 600))
-        print(click)
+        self.TA = pygame.transform.scale(self.TA, (35, 35))
 
         if (click == 1):
             self.screen.blit(self.TA, (x+16, y+16))
-            print(x+21, y)
 
         if (click == 2):
+            self.TA = pygame.transform.flip(self.TA, True, False)
             self.screen.blit(self.TA, (x-16, y+16))
 
         if (click == 3):
@@ -111,10 +111,6 @@ class orderOptions:
                     if self.toppingArea7.collidepoint(pygame.mouse.get_pos()):
                         self.TA7count += 1
                         self.toppingArea(self.toppingArea7[0], self.toppingArea7[1], self.TA7count % 7)
-
-                    if self.toppingArea8.collidepoint(pygame.mouse.get_pos()):
-                        self.TA8count += 1
-                        self.toppingArea(self.toppingArea8[0], self.toppingArea8[1], self.TA8count % 7)
 
             pygame.display.flip()
 
