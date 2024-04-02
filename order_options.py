@@ -41,31 +41,57 @@ class orderOptions:
 
         # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.toppingArea7), 10)
 
-    def toppingArea(self, x, y, click):
+    def toppingArea(self, x, y, click, color):
         self.TA = pygame.image.load(os.path.join("pictures", "toppingAreaImage.png"))
         self.TA = pygame.transform.scale(self.TA, (35, 35))
 
+        if color == 1: # pink
+            self.TAbg = pygame.image.load(os.path.join("pictures", "blankToppingAreaPink.png"))
+        
+        else: # white
+            self.TAbg = pygame.image.load(os.path.join("pictures", "blankToppingAreaWhite.png"))
+
         if (click == 1):
+            self.screen.blit(self.TAbg, (x+2, y+3))
             self.screen.blit(self.TA, (x+16, y+16))
 
         if (click == 2):
             self.TA = pygame.transform.flip(self.TA, True, False)
-            self.screen.blit(self.TA, (x-16, y+16))
+            self.screen.blit(self.TAbg, (x+2, y+3))
+            self.screen.blit(self.TA, (x-2, y+16))
 
         if (click == 3):
-            self.screen.blit(self.TA, (x+21, y))
+            self.TA = pygame.transform.flip(self.TA, True, True)
+            self.screen.blit(self.TAbg, (x+2, y+3))
+            self.screen.blit(self.TA, (x-2, y-4))
 
         if (click == 4):
-            self.screen.blit(self.TA, (x+21, y))
+            self.TA = pygame.transform.flip(self.TA, False, True)
+            self.screen.blit(self.TAbg, (x+2, y+3))
+            self.screen.blit(self.TA, (x+16, y-4))
         
         if (click == 5):
-            self.screen.blit(self.TA, (x+21, y))
+            self.screen.blit(self.TAbg, (x+2, y+3))
+            self.screen.blit(self.TA, (x+16, y+16))
+            self.TA = pygame.transform.flip(self.TA, False, True)
+            self.screen.blit(self.TA, (x+16, y-4))
 
         if (click == 6):
-            self.screen.blit(self.TA, (x+21, y))
+            self.screen.blit(self.TAbg, (x+2, y+3))
+            self.TA = pygame.transform.flip(self.TA, True, False)
+            self.screen.blit(self.TA, (x-2, y+16))
+            self.TA = pygame.transform.flip(self.TA, False, True)
+            self.screen.blit(self.TA, (x-2, y-4))
 
         if (click == 0):
-            self.screen.blit(self.TA, (x+21, y))
+            self.screen.blit(self.TAbg, (x+2, y+3))
+            self.screen.blit(self.TA, (x+16, y+16))
+            self.TA = pygame.transform.flip(self.TA, False, True)
+            self.screen.blit(self.TA, (x+16, y-4))
+            self.TA = pygame.transform.flip(self.TA, True, True)
+            self.screen.blit(self.TA, (x-2, y+16))
+            self.TA = pygame.transform.flip(self.TA, False, True)
+            self.screen.blit(self.TA, (x-2, y-4))
 
     def run(self):
         self.setup()
@@ -86,31 +112,31 @@ class orderOptions:
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if self.toppingArea1.collidepoint(pygame.mouse.get_pos()):
                         self.TA1count += 1
-                        self.toppingArea(self.toppingArea1[0], self.toppingArea1[1], self.TA1count % 7)
+                        self.toppingArea(self.toppingArea1[0], self.toppingArea1[1], self.TA1count % 7, 1)
                     
                     if self.toppingArea2.collidepoint(pygame.mouse.get_pos()):
                         self.TA2count += 1
-                        self.toppingArea(self.toppingArea2[0], self.toppingArea2[1], self.TA2count % 7)
+                        self.toppingArea(self.toppingArea2[0], self.toppingArea2[1], self.TA2count % 7, 2)
 
                     if self.toppingArea3.collidepoint(pygame.mouse.get_pos()):
                         self.TA3count += 1
-                        self.toppingArea(self.toppingArea3[0], self.toppingArea3[1], self.TA3count % 7)
+                        self.toppingArea(self.toppingArea3[0], self.toppingArea3[1], self.TA3count % 7, 1)
 
                     if self.toppingArea4.collidepoint(pygame.mouse.get_pos()):
                         self.TA4count += 1
-                        self.toppingArea(self.toppingArea4[0], self.toppingArea4[1], self.TA4count % 7)
+                        self.toppingArea(self.toppingArea4[0], self.toppingArea4[1], self.TA4count % 7, 2)
 
                     if self.toppingArea5.collidepoint(pygame.mouse.get_pos()):
                         self.TA5count += 1
-                        self.toppingArea(self.toppingArea5[0], self.toppingArea5[1], self.TA5count % 7)
+                        self.toppingArea(self.toppingArea5[0], self.toppingArea5[1], self.TA5count % 7, 1)
 
                     if self.toppingArea6.collidepoint(pygame.mouse.get_pos()):
                         self.TA6count += 1
-                        self.toppingArea(self.toppingArea6[0], self.toppingArea6[1], self.TA6count % 7)
+                        self.toppingArea(self.toppingArea6[0], self.toppingArea6[1], self.TA6count % 7, 2)
 
                     if self.toppingArea7.collidepoint(pygame.mouse.get_pos()):
                         self.TA7count += 1
-                        self.toppingArea(self.toppingArea7[0], self.toppingArea7[1], self.TA7count % 7)
+                        self.toppingArea(self.toppingArea7[0], self.toppingArea7[1], self.TA7count % 7, 1)
 
             pygame.display.flip()
 
