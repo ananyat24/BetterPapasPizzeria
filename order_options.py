@@ -35,6 +35,8 @@ class orderOptions:
         self.MA7count = 0
         self.MA8count = 0
 
+        self.sliceCount = 0
+
     def setup(self):
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
         self.bg = pygame.transform.scale(self.bg, (self.WIDTH, self.HEIGHT))
@@ -55,6 +57,8 @@ class orderOptions:
         self.multiplierArea5 = pygame.Rect(940, 325, 42, 42)
         self.multiplierArea6 = pygame.Rect(940, 365, 42, 42)
         self.multiplierArea7 = pygame.Rect(940, 405, 42, 42)
+
+        self.sliceArea = pygame.Rect(901, 443, 60, 60)
 
         # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.multiplierArea7), 10)
 
@@ -145,6 +149,29 @@ class orderOptions:
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
             self.screen.blit(self.M4X, (x, y))
 
+    def sliceSelect (self, click):
+        self.sliceBG = pygame.image.load(os.path.join("pictures", "ticketSliceBG.png"))
+        self.sliceColor = (97, 71, 24)
+        x = self.sliceArea[0]
+        y = self.sliceArea[1]
+
+        if (click == 1):
+            self.screen.blit(self.sliceBG, (x, y))
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
+
+        if (click == 2):
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
+
+        if (click == 3):
+            self.screen.blit(self.sliceBG, (x, y))
+            pygame.draw.line(self.screen, self.sliceColor, (x+20, y+17), (x+55, y+51), 3)
+            pygame.draw.line(self.screen, self.sliceColor, (x+58, y+19), (x+21, y+51), 3)
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
+
+        if (click == 0):
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
+            
     def run(self):
         self.setup()
 
@@ -217,6 +244,10 @@ class orderOptions:
                     elif self.multiplierArea7.collidepoint(pygame.mouse.get_pos()):
                         self.MA7count +=1
                         self.multiplierArea(self.multiplierArea7[0], self.multiplierArea7[1], self.MA7count % 4, 1)
+
+                    elif self.sliceArea.collidepoint(pygame.mouse.get_pos()):
+                        self.sliceCount +=1
+                        self.sliceSelect(self.sliceCount % 4)
 
             pygame.display.flip()
 
