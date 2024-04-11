@@ -1,44 +1,53 @@
 import pygame
-from chef_files.slicing_pizza import SlicingPizza
 from constants import Constants
+from network import Network
 
 # create the screen
 pygame.init()
+pygame.font.init() 
 c = Constants()
 screen = pygame.display.set_mode((c.screen_width, c.screen_height))
-    
+homescreen_image = pygame.image.load("background images/Homescreen.png")
+
 # intialize all the variables
 gameloop = True
-# variables for chef character
-cutting_pizza = False
-x_org, y_org = None, None
-chef_slicing_pizza = SlicingPizza(screen, 3)
 
-# display whole pizza before the cutting process
-pizza_image = pygame.image.load("pictures/plain_pizza_pic.png")
-chef_slicing_pizza.add_pizza_image(pizza_image, (150, 175))
-chef_slicing_pizza.pizza_fly_in()
+
+my_font = pygame.font.SysFont('Comic Sans MS', 30)
+n = Network()
+n.connect()
+
+data = {"type":"into", "data": {"key": None, "color": None}}
 
 # gameloop
 while gameloop:
+    
+
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameloop = False
-        
-        # draw a line based on mouse clicks
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            cutting_pizza = True
-            if x_org == None:
-                x_org, y_org, = pygame.mouse.get_pos()
-        elif event.type == pygame.MOUSEBUTTONUP:
-            chef_slicing_pizza.display_pizza_slices(x_org, y_org, pygame.mouse.get_pos())
-            cutting_pizza = False
-            x_org = None
-            
-        # draw line when cutting pizza
-        if cutting_pizza:
-            chef_slicing_pizza.display_cutting_line(x_org, y_org)
-        
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                data["data"]["key"] = "left"
+                data = n.send(data)
+            if event.key == pygame.K_RIGHT:
+                data["data"]["key"] = "right"
+                data = n.send(data)
+    if data["data"]["color"]:
+        if data["data"]["color"] == "red":
+            screen.fill((255,0,0))
+        else:
+            screen.fill((0, 255,0))
+    else:
+        screen.blit(homescreen_image, (0, 0))
     pygame.display.update()
+    # n.send("hi")
+
+    # print(n.get_role())
+
+    # text_surface = my_font.render(n.get_role(), False, (0, 0, 0))
+    # screen.blit(text_surface, (0,0))
 
 pygame.quit()
