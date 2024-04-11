@@ -1,32 +1,33 @@
 import pygame
+from constants import Constants
 
 class Chef:
     
-    def __init__(self, screen:pygame.display, background:pygame.image):
+    def __init__(self, screen:pygame.display, c:Constants):
+        self.c = c
         self.screen = screen
-        
-        self.pizza_image = None # image for whole pizza
-        self.pizza_image_location = () # location for pizza in the form (x_pos, y_pos)
-        
-        self.lines = [] # lines for cut pizza
-        
-        self.background_image = background
-        
-        self.topping_boxes = [] # list of tuples in the form (image, location) for all topping containers
     
     
     # show the current pizza (needed for erasing cutting line)
     def display_current_pizza(self):
-        self.screen.blit(self.background_image, (0, 0))
-        self.screen.blit(self.pizza_image, (self.pizza_image_location[0], self.pizza_image_location[1]))
-        for line in self.lines:
+        self.screen.blit(self.c.background_image, (0, 0))
+        self.screen.blit(self.c.pizza_image, (self.c.pizza_image_location[0], self.c.pizza_image_location[1]))
+        for line in self.c.lines:
             pygame.draw.line(line[0], line[1], line[2], line[3], line[4])
-        for tb in self.topping_boxes:
+        for tb in self.c.topping_boxes:
             self.screen.blit(tb[0], tb[1])
             
             
     # add new images to the screen
     def add_pizza_image(self, image, location:tuple): # locations is a list of tuples in the form (x_pos, y_pos)
-        self.pizza_image = image
-        self.pizza_image_location = location
+        self.c.pizza_image = image
+        self.c.pizza_image_location = location
+        
+    
+    # change the background depending on what task is being done
+    def change_background(self, image_filepath:str):
+        img = pygame.image.load(image_filepath)
+        image = pygame.transform.scale(img, (self.c.screen_width, self.c.screen_height))
+        self.c.background_image = image
+        return image
             
