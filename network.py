@@ -1,6 +1,5 @@
 import socket
 from constants import Constants
-from data import Data
 import json
 
 c = Constants()
