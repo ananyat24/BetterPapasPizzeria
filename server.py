@@ -28,7 +28,7 @@ def threaded_client(conn, player):
         try:
             data = json.loads(conn.recv(2048).decode(ENCODER))
 
-            print(data["data"]["color"])
+            # print(data["data"]["color"])
 
             if not data:
                 print("Disconnected")
@@ -37,12 +37,14 @@ def threaded_client(conn, player):
             else:
             
                 if data["data"]["key"] == "left":
-                    data["data"]["color"] = "red"
+                    data["data"]["role"] = "waiter"
+                    data["stage"] = "waiter1"
                 
                 if data["data"]["key"] == "right":
-                    data["data"]["color"] = "blue"
+                    data["data"]["role"] = "chef"
+                    data["stage"] = "chef1"
 
-                print(data["data"]["color"])
+                # print(data["data"]["color"])
  
                 # reply = role[player]
 
@@ -65,7 +67,7 @@ while True:
     conn, addr = server_socket.accept()
     print("Connected to:", addr)
     # conn.send(role[currentPlayer].encode(ENCODER))
-    # print(role[currentPblayer])
+    # print(role[currentPlayer])
     start_new_thread(threaded_client, (conn, currentPlayer))
     currentPlayer += 1
 
