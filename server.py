@@ -92,7 +92,7 @@ while True:
     conn, addr = server_socket.accept()
     print("Connected to:", addr)
     # conn.send(role[currentPlayer].encode(ENCODER))
-    # print(role[currentPblayer])
+    # print(role[currentPlayer])
     start_new_thread(threaded_client, (conn, currentPlayer))
     currentPlayer += 1
 

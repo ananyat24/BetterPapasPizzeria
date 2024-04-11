@@ -3,14 +3,19 @@ from constants import Constants
 from network import Network
 from order_options import orderOptions
 from chef_main import Chef
+from order_options import orderOptions
+from chef_main import Chef
 
 
 # create the screen
 pygame.init()
 pygame.font.init() 
+pygame.font.init() 
 c = Constants()
 screen = pygame.display.set_mode((c.screen_width, c.screen_height))
 homescreen_image = pygame.image.load("background images/Homescreen.png")
+waiter = orderOptions()
+chef = Chef()
 waiter = orderOptions()
 chef = Chef()
 
