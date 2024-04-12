@@ -35,6 +35,15 @@ class orderOptions:
         self.MA7count = 0
         self.MA8count = 0
 
+        self.IA1count = 0
+        self.IA2count = 0
+        self.IA3count = 0
+        self.IA4count = 0
+        self.IA5count = 0
+        self.IA6count = 0
+        self.IA7count = 0
+        self.IA8count = 0
+
         self.sliceCount = 0
 
     def setup(self):
@@ -58,9 +67,17 @@ class orderOptions:
         self.multiplierArea6 = pygame.Rect(940, 365, 42, 42)
         self.multiplierArea7 = pygame.Rect(940, 405, 42, 42)
 
+        self.ingredientArea1 = pygame.Rect(840, 160, 92, 42)
+        self.ingredientArea2 = pygame.Rect(840, 200, 92, 42)
+        self.ingredientArea3 = pygame.Rect(840, 240, 92, 42)
+        self.ingredientArea4 = pygame.Rect(840, 280, 92, 42)
+        self.ingredientArea5 = pygame.Rect(840, 320, 92, 42)
+        self.ingredientArea6 = pygame.Rect(840, 360, 92, 42)
+        self.ingredientArea7 = pygame.Rect(840, 400, 92, 42)
+
         self.sliceArea = pygame.Rect(901, 443, 60, 60)
 
-        # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.multiplierArea7), 10)
+        # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.ingredientArea1), 10)
 
     def toppingArea(self, x, y, click, color):
         self.TA = pygame.image.load(os.path.join("pictures", "toppingAreaImage.png"))
@@ -113,6 +130,69 @@ class orderOptions:
             self.screen.blit(self.TA, (x-2, y+16))
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x-2, y-4))
+
+    def ingredientArea(self, x, y, click, color):
+        self.artichoke = pygame.image.load(os.path.join("pictures\single_ingredients", "artichoke.png"))
+        self.artichoke = pygame.transform.scale(self.artichoke, (40, 40))
+
+        self.mushroom = pygame.image.load(os.path.join("pictures\single_ingredients", "mushroom.png"))
+        self.mushroom = pygame.transform.scale(self.mushroom, (40, 40))
+
+        self.olive = pygame.image.load(os.path.join("pictures\single_ingredients", "olive.png"))
+        self.olive = pygame.transform.scale(self.olive, (40, 40))
+
+        self.onions = pygame.image.load(os.path.join("pictures\single_ingredients", "onions.png"))
+        self.onions = pygame.transform.scale(self.onions, (40, 40))
+
+        self.pepperoni = pygame.image.load(os.path.join("pictures\single_ingredients", "pepperoni.png"))
+        self.pepperoni = pygame.transform.scale(self.pepperoni, (40, 40))
+
+        self.pineapple = pygame.image.load(os.path.join("pictures\single_ingredients", "pineapple.png"))
+        self.pineapple = pygame.transform.scale(self.pineapple, (40, 40))
+
+        self.spinach = pygame.image.load(os.path.join("pictures\single_ingredients", "spinach.png"))
+        self.spinach = pygame.transform.scale(self.spinach, (40, 40))
+
+        self.tomato = pygame.image.load(os.path.join("pictures\single_ingredients", "tomato.png"))
+        self.tomato = pygame.transform.scale(self.tomato, (40, 40))
+
+        if color == 1: # pink
+            self.bgColor = (253, 210, 206)
+        
+        else: # white
+            self.bgColor = (255, 255, 255)
+
+        if (click == 1):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.artichoke, (x, y))
+
+        if (click == 2):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.mushroom, (x, y))
+
+        if (click == 3):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.olive, (x, y))
+
+        if (click == 4):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.onions, (x, y))
+
+        if (click == 5):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.pepperoni, (x, y))
+
+        if (click == 6):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.pineapple, (x, y))
+
+        if (click == 7):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.spinach, (x, y))
+
+        if (click == 0):
+            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
+            self.screen.blit(self.tomato, (x, y))
 
     def multiplierArea(self, x, y, click, color):
         self.M1X = pygame.image.load(os.path.join("pictures", "1x_image.png"))
@@ -244,6 +324,34 @@ class orderOptions:
                     elif self.multiplierArea7.collidepoint(pygame.mouse.get_pos()):
                         self.MA7count +=1
                         self.multiplierArea(self.multiplierArea7[0], self.multiplierArea7[1], self.MA7count % 4, 1)
+
+                    elif self.ingredientArea1.collidepoint(pygame.mouse.get_pos()):
+                        self.IA1count +=1
+                        self.ingredientArea(self.ingredientArea1[0], self.ingredientArea1[1], self.IA1count % 4, 1)
+
+                    elif self.ingredientArea2.collidepoint(pygame.mouse.get_pos()):
+                        self.IA2count +=1
+                        self.ingredientArea(self.ingredientArea2[0], self.ingredientArea2[1], self.IA2count % 4, 2)
+
+                    elif self.ingredientArea3.collidepoint(pygame.mouse.get_pos()):
+                        self.IA3count +=1
+                        self.ingredientArea(self.ingredientArea3[0], self.ingredientArea3[1], self.IA3count % 4, 1)
+
+                    elif self.ingredientArea4.collidepoint(pygame.mouse.get_pos()):
+                        self.IA4count +=1
+                        self.ingredientArea(self.ingredientArea4[0], self.ingredientArea4[1], self.IA4count % 4, 2)
+
+                    elif self.ingredientArea5.collidepoint(pygame.mouse.get_pos()):
+                        self.IA5count +=1
+                        self.ingredientArea(self.ingredientArea5[0], self.ingredientArea5[1], self.IA5count % 4, 1)
+
+                    elif self.ingredientArea6.collidepoint(pygame.mouse.get_pos()):
+                        self.IA6count +=1
+                        self.ingredientArea(self.ingredientArea6[0], self.ingredientArea6[1], self.IA6count % 4, 2)
+
+                    elif self.ingredientArea7.collidepoint(pygame.mouse.get_pos()):
+                        self.IA7count +=1
+                        self.ingredientArea(self.ingredientArea7[0], self.ingredientArea7[1], self.IA7count % 4, 1)
 
                     elif self.sliceArea.collidepoint(pygame.mouse.get_pos()):
                         self.sliceCount +=1
