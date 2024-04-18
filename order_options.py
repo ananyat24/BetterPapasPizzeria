@@ -79,6 +79,23 @@ class orderOptions:
 
         # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.ingredientArea1), 10)
 
+    def update(self):
+        c = Constants()
+        
+        c.VALUES_JSON = {
+                       "S1": self.TA1count, "T1": self.IA1count, "M1": self.MA1count,
+                       "S2": self.TA2count, "T2": self.IA2count, "M2": self.MA2count,
+                       "S3": self.TA3count, "T3": self.IA3count, "M3": self.MA3count,
+                       "S4": self.TA4count, "T4": self.IA4count, "M4": self.MA4count,
+                       "S5": self.TA5count, "T5": self.IA5count, "M5": self.MA5count,
+                       "S6": self.TA6count, "T6": self.IA6count, "M6": self.MA6count,
+                       "S7": self.TA7count, "T7": self.IA7count, "M7": self.MA7count,
+                       "CUTS": self.sliceCount
+                       }
+        
+        c.ticketLoad()
+        c.ticketSave()
+
     def toppingArea(self, x, y, click, color):
         self.TA = pygame.image.load(os.path.join("pictures", "toppingAreaImage.png"))
         self.TA = pygame.transform.scale(self.TA, (35, 35))
@@ -93,35 +110,35 @@ class orderOptions:
             self.screen.blit(self.TAbg, (x+2, y+3))
             self.screen.blit(self.TA, (x+16, y+16))
 
-        if (click == 2):
+        elif (click == 2):
             self.TA = pygame.transform.flip(self.TA, True, False)
             self.screen.blit(self.TAbg, (x+2, y+3))
             self.screen.blit(self.TA, (x-2, y+16))
 
-        if (click == 3):
+        elif (click == 3):
             self.TA = pygame.transform.flip(self.TA, True, True)
             self.screen.blit(self.TAbg, (x+2, y+3))
             self.screen.blit(self.TA, (x-2, y-4))
 
-        if (click == 4):
+        elif (click == 4):
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TAbg, (x+2, y+3))
             self.screen.blit(self.TA, (x+16, y-4))
         
-        if (click == 5):
+        elif (click == 5):
             self.screen.blit(self.TAbg, (x+2, y+3))
             self.screen.blit(self.TA, (x+16, y+16))
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x+16, y-4))
 
-        if (click == 6):
+        elif (click == 6):
             self.screen.blit(self.TAbg, (x+2, y+3))
             self.TA = pygame.transform.flip(self.TA, True, False)
             self.screen.blit(self.TA, (x-2, y+16))
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x-2, y-4))
 
-        if (click == 0):
+        elif (click == 0):
             self.screen.blit(self.TAbg, (x+2, y+3))
             self.screen.blit(self.TA, (x+16, y+16))
             self.TA = pygame.transform.flip(self.TA, False, True)
@@ -130,6 +147,8 @@ class orderOptions:
             self.screen.blit(self.TA, (x-2, y+16))
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x-2, y-4))
+
+        self.update()
 
     def ingredientArea(self, x, y, click, color):
         self.artichoke = pygame.image.load(os.path.join("pictures\single_ingredients", "artichoke.png"))
@@ -166,33 +185,35 @@ class orderOptions:
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.artichoke, (x, y))
 
-        if (click == 2):
+        elif (click == 2):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.mushroom, (x, y))
 
-        if (click == 3):
+        elif (click == 3):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.olive, (x, y))
 
-        if (click == 4):
+        elif (click == 4):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.onions, (x, y))
 
-        if (click == 5):
+        elif (click == 5):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.pepperoni, (x, y))
 
-        if (click == 6):
+        elif (click == 6):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.pineapple, (x, y))
 
-        if (click == 7):
+        elif (click == 7):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.spinach, (x, y))
 
-        if (click == 0):
+        elif (click == 0):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
             self.screen.blit(self.tomato, (x, y))
+
+        self.update()
 
     def multiplierArea(self, x, y, click, color):
         self.M1X = pygame.image.load(os.path.join("pictures", "1x_image.png"))
@@ -217,17 +238,19 @@ class orderOptions:
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
             self.screen.blit(self.M1X, (x, y))
 
-        if (click == 2):
+        elif (click == 2):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
             self.screen.blit(self.M2X, (x, y))
 
-        if (click == 3):
+        elif (click == 3):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
             self.screen.blit(self.M3X, (x, y))
 
-        if (click == 0):
+        elif (click == 0):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
             self.screen.blit(self.M4X, (x, y))
+
+        self.update()
 
     def sliceSelect (self, click):
         self.sliceBG = pygame.image.load(os.path.join("pictures", "ticketSliceBG.png"))
@@ -239,23 +262,27 @@ class orderOptions:
             self.screen.blit(self.sliceBG, (x, y))
             pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
 
-        if (click == 2):
+        elif (click == 2):
             pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
 
-        if (click == 3):
+        elif (click == 3):
             self.screen.blit(self.sliceBG, (x, y))
             pygame.draw.line(self.screen, self.sliceColor, (x+20, y+17), (x+55, y+51), 3)
             pygame.draw.line(self.screen, self.sliceColor, (x+58, y+19), (x+21, y+51), 3)
             pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
 
-        if (click == 0):
+        elif (click == 0):
             pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
             pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
+
+        self.update()
             
     def run(self):
         self.setup()
 
         while True:
+            reload = False
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -327,38 +354,53 @@ class orderOptions:
 
                     elif self.ingredientArea1.collidepoint(pygame.mouse.get_pos()):
                         self.IA1count +=1
-                        self.ingredientArea(self.ingredientArea1[0], self.ingredientArea1[1], self.IA1count % 4, 1)
+                        self.ingredientArea(self.ingredientArea1[0], self.ingredientArea1[1], self.IA1count % 8, 1)
 
                     elif self.ingredientArea2.collidepoint(pygame.mouse.get_pos()):
                         self.IA2count +=1
-                        self.ingredientArea(self.ingredientArea2[0], self.ingredientArea2[1], self.IA2count % 4, 2)
+                        self.ingredientArea(self.ingredientArea2[0], self.ingredientArea2[1], self.IA2count % 8, 2)
 
                     elif self.ingredientArea3.collidepoint(pygame.mouse.get_pos()):
                         self.IA3count +=1
-                        self.ingredientArea(self.ingredientArea3[0], self.ingredientArea3[1], self.IA3count % 4, 1)
+                        self.ingredientArea(self.ingredientArea3[0], self.ingredientArea3[1], self.IA3count % 8, 1)
 
                     elif self.ingredientArea4.collidepoint(pygame.mouse.get_pos()):
                         self.IA4count +=1
-                        self.ingredientArea(self.ingredientArea4[0], self.ingredientArea4[1], self.IA4count % 4, 2)
+                        self.ingredientArea(self.ingredientArea4[0], self.ingredientArea4[1], self.IA4count % 8, 2)
 
                     elif self.ingredientArea5.collidepoint(pygame.mouse.get_pos()):
                         self.IA5count +=1
-                        self.ingredientArea(self.ingredientArea5[0], self.ingredientArea5[1], self.IA5count % 4, 1)
+                        self.ingredientArea(self.ingredientArea5[0], self.ingredientArea5[1], self.IA5count % 8, 1)
 
                     elif self.ingredientArea6.collidepoint(pygame.mouse.get_pos()):
                         self.IA6count +=1
-                        self.ingredientArea(self.ingredientArea6[0], self.ingredientArea6[1], self.IA6count % 4, 2)
+                        self.ingredientArea(self.ingredientArea6[0], self.ingredientArea6[1], self.IA6count % 8, 2)
 
                     elif self.ingredientArea7.collidepoint(pygame.mouse.get_pos()):
                         self.IA7count +=1
-                        self.ingredientArea(self.ingredientArea7[0], self.ingredientArea7[1], self.IA7count % 4, 1)
+                        self.ingredientArea(self.ingredientArea7[0], self.ingredientArea7[1], self.IA7count % 8, 1)
 
                     elif self.sliceArea.collidepoint(pygame.mouse.get_pos()):
                         self.sliceCount +=1
                         self.sliceSelect(self.sliceCount % 4)
-
+            
             pygame.display.flip()
 
+            if reload: break
+        c = Constants()
+        c.VALUES_JSON = {
+                        "S1": self.TA1count, "T1": self.IA1count, "M1": self.MA1count,
+                        "S2": self.TA2count, "T2": self.IA2count, "M2": self.MA2count,
+                        "S3": self.TA3count, "T3": self.IA3count, "M3": self.MA3count,
+                        "S4": self.TA4count, "T4": self.IA4count, "M4": self.MA4count,
+                        "S5": self.TA5count, "T5": self.IA5count, "M5": self.MA5count,
+                        "S6": self.TA6count, "T6": self.IA6count, "M6": self.MA6count,
+                        "S7": self.TA7count, "T7": self.IA7count, "M7": self.MA7count,
+                        "CUTS": self.sliceCount
+                        }
+    
+        c.ticketLoad()
+        c.ticketSave()
 
 if __name__ == "__main__":
     c = orderOptions()
