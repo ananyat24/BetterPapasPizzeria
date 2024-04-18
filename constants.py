@@ -10,7 +10,10 @@ import socket
 
 import os
 import json
+<<<<<<< HEAD
 import socket
+=======
+>>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
 
 class Constants():
     def __init__(self):
@@ -32,6 +35,10 @@ class Constants():
         self.pizza_image_location = () # location for pizza in the form (x_pos, y_pos)
         self.lines = [] # lines for cut pizza
         self.topping_boxes = [] # list of tuples in the form (image, location) for all topping containers
+<<<<<<< HEAD
+=======
+
+>>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
         self.VALUES_JSON = {}
         self.VALUES = {}
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "values.json")) as f:
@@ -40,6 +47,7 @@ class Constants():
     def ticketLoad(self):
         self.VALUES = self.VALUES_JSON.copy()
 
+<<<<<<< HEAD
         return self.VALUES
 
 
@@ -49,3 +57,8 @@ class Constants():
 =======
         
 >>>>>>> ec6bec4 (Succesfully implemented socket and threading test)
+=======
+    def ticketSave(self):
+        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "values.json"), "w") as f:
+            json.dump(self.VALUES_JSON, f)
+>>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
