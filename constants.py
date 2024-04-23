@@ -9,6 +9,8 @@ class Constants():
         self.screen_height = 600
         self.screen_width = 1000
         self.background_image = None
+
+        self.playerNumber = 1
         
         self.pizza_image = None # image for whole pizza
         self.pizza_image_location = () # location for pizza in the form (x_pos, y_pos)
