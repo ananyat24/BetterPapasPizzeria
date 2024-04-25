@@ -24,6 +24,7 @@ class Constants():
 
     def ticketLoad(self):
         self.VALUES = self.VALUES_JSON.copy()
+        return self.VALUES
 
     def ticketSave(self):
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "values.json"), "w") as f:
