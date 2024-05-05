@@ -56,16 +56,59 @@ class orderTicketFill:
             value += 1
 
     def fillToppings (self):
-        quit
+        x = 840
+        y = 160
+        color = 0
+        click = 0
+        value = 0
+
+        for i in self.valueList:
+            if value%3 != 1 or value > 20:
+                value += 1
+                continue
+
+            click = i % 8
+            if value % 2 == 1:
+                color = 1
+            else:
+                color = 0
+
+            if i != 0:
+                self.order.ingredientArea(x, (y + (40*(value/3))), click, color)
+            
+            value += 1
 
     def fillMultiplier (self):
-        quit
+        x = 940
+        y = 160
+        color = 0
+        click = 0
+        value = 0
+
+        for i in self.valueList:
+            if value%3 != 2 or value > 20:
+                value += 1
+                continue
+
+            click = i % 4
+            if value % 2 == 1:
+                color = 0
+            else:
+                color = 1
+
+            if i != 0:
+                self.order.multiplierArea(x, (y + (40*(value/3))), click, color)
+            
+            value += 1
         
     def fillSlices (self):
-        quit
+        click = self.valueList[21]
+        
+        if click != 0:
+            click %= 4
+            self.order.sliceSelect(click)
 
     def run(self):
-        self.setup()
         self.fillArea()
         self.fillToppings()
         self.fillMultiplier()
@@ -86,4 +129,5 @@ class orderTicketFill:
 
 if __name__ == "__main__":
     o = orderTicketFill()
+    o.setup()
     o.run()
