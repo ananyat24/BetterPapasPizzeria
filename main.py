@@ -11,12 +11,16 @@ screen = pygame.display.set_mode((c.screen_width, c.screen_height))
     
 # intialize all the variables
 gameloop = True
-# variables for chef character
-cutting_pizza = False
-x_org, y_org = None, None
-# note: the 3 below depends on user input for number of cuts (need to change this when putting everything together)
+# note: the '3' in the line below depends on user input for number of cuts (need to change this when putting everything together)
 chef_slicing_pizza = SlicingPizza(screen, 3, c)
 chef_adding_toppings = AddingToppings(screen, c)
+# variables for chef character - cutting pizza
+cutting_pizza = False
+x_org, y_org = None, None
+# variables for chef character - adding toppings
+adding_toppings = False
+topping = None
+chef_slicing_pizza.curr_toppings = []
 
 # start with adding toppings
 chef_adding_toppings.bg_to_toppings_board()
@@ -53,7 +57,11 @@ while gameloop:
             
             # check if the user is trying to drag and drop toppings
             elif c.background_image == chef_adding_toppings.background_image:
-                pass
+                for topping_option in chef_adding_toppings.topping_boxes:
+                    if topping_option.rect.collidepoint(pygame.mouse.get_pos()):
+                        adding_toppings = True
+                        topping = topping_option
+                        break
         
         elif event.type == pygame.MOUSEBUTTONUP:
             
@@ -62,6 +70,12 @@ while gameloop:
                 chef_slicing_pizza.display_pizza_slices(x_org, y_org, pygame.mouse.get_pos())
                 cutting_pizza = False
                 x_org = None
+            
+            # check if the user is placing a topping on the pizza
+            if adding_toppings:
+                chef_slicing_pizza.curr_toppings.append((topping.one_topping_image, pygame.mouse.get_pos()))
+                adding_toppings = False
+                topping = None
                 
         # check if button has been clicked
         elif not oven_button_clicked and oven_button.collidepoint(pygame.mouse.get_pos()):
@@ -72,6 +86,10 @@ while gameloop:
         # draw line when cutting pizza
         if cutting_pizza:
             chef_slicing_pizza.display_cutting_line(x_org, y_org)
+            
+        # drag the topping onto the pizza
+        if adding_toppings:
+            topping.topping_follow_cursor(chef_slicing_pizza.curr_toppings)
         
         
     pygame.display.update()
