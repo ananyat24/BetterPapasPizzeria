@@ -9,13 +9,24 @@ class Chef:
     
     
     # show the current pizza (needed for erasing cutting line)
-    def display_current_pizza(self):
+    def display_current_pizza(self, curr_toppings:list):
+        # clear the screen (background + plain pizza displayed)
         self.screen.blit(self.c.background_image, (0, 0))
         self.screen.blit(self.c.pizza_image, (self.c.pizza_image_location[0], self.c.pizza_image_location[1]))
+        
+        # display pizza toppings
+        for t in curr_toppings:
+            self.screen.blit(t[0], t[1])
+        
+        # display the pizza cuts
         for line in self.c.lines:
             pygame.draw.line(line[0], line[1], line[2], line[3], line[4])
+            
+        """
+        use the code below to make the topping_boxes code more concise if time
         for tb in self.c.topping_boxes:
             self.screen.blit(tb[0], tb[1])
+        """
             
             
     # add new images to the screen
