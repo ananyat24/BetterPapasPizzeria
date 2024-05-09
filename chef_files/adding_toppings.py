@@ -9,25 +9,43 @@ class AddingToppings(Chef):
         self.c = c
         self.pizza_image_location = (295, 65)
         self.background_image = None
+
+        
+        # contains a list of all toppings
+        self.topping_boxes = []
+        
         super().__init__(screen, self.c)
         
         # create each topping as a separate object
-        #artichoke = Topping("pictures/single_ingredients/artichoke.png", location:tuple, width:int, height:int, screen)
-        #self.topping_boxes.append(artichoke.one_topping_image, artichoke.location)
-        """
-        ^ steps needed:
-        1. create each topping as a separate object
-        2. change all location, width, and height parameters to their proper values
-        3. figure out how to get the topping image to follow the cursor
-        4. using colliderect and mouse clicks, determine when to pick up and drop toppings
-        5. add a done button that allows user to move to next stage (technically baking the pizza but cutting the pizza for now) - there might be a button on the screen already just need to add the code
-        """
+        artichoke = Topping("pictures/single_ingredients/artichoke.png", (715, 150), screen, self.c)
+        self.topping_boxes.append(artichoke)
+        
+        mushroom = Topping("pictures/single_ingredients/mushroom.png", (650, 405), screen, self.c)
+        self.topping_boxes.append(mushroom)
+        
+        olive = Topping("pictures/single_ingredients/olive.png", (715, 290), screen, self.c)
+        self.topping_boxes.append(olive)
+        
+        onions = Topping("pictures/single_ingredients/onions.png", (170, 285), screen, self.c)
+        self.topping_boxes.append(onions)
+        
+        pepperoni = Topping("pictures/single_ingredients/pepperoni.png", (170, 150), screen, self.c)
+        self.topping_boxes.append(pepperoni)
+        
+        pineapple = Topping("pictures/single_ingredients/pineapple.png", (230, 400), screen, self.c)
+        self.topping_boxes.append(pineapple)
+        
+        spinach = Topping("pictures/single_ingredients/spinach.png", (650, 40), screen, self.c)
+        self.topping_boxes.append(spinach)
+        
+        tomato = Topping("pictures/single_ingredients/tomato.png", (240, 30), screen, self.c)
+        self.topping_boxes.append(tomato)
 
         
     # switch the background to the toppings board
     def bg_to_toppings_board(self):
         self.background_image = self.change_background("background images/kitchen backgrounds/Kitchen - Ingredients BG.png")
-        
+
     
     # have the pizza fly in initially
     def pizza_fly_in(self):
