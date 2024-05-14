@@ -44,8 +44,8 @@ class Constants():
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "values.json")) as f:
             self.VALUES_JSON = json.load(f)
 
-    def ticketLoad(self):
-        self.VALUES = self.VALUES_JSON.copy()
+    # def ticketLoad(self):
+    #     self.VALUES = self.VALUES_JSON.copy()
 
 <<<<<<< HEAD
         return self.VALUES
