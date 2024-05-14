@@ -69,6 +69,18 @@ def threaded_client(conn, player):
 
                         
 
+                # if data["key"] == "left":
+                #     data["role"] = "waiter"
+                #     data["remaining_roles"].remove("waiter")
+                #     data["stage"] = "waiter1"
+                
+                # if data["key"] == "right":
+                #     data["role"] = "chef"
+                #     data["remaining_roles"].remove("chef")
+                #     data["stage"] = "chef1"
+
+                        
+
                 # print(data["data"]["color"])
  
                 # reply = role[player]
