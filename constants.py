@@ -3,15 +3,18 @@
 # also store variables that are changed throughout code but needed in multiple files here
 
 import os
-import jso
-import socket
 
+import json
+import socket
 
 
 class Constants():
     def __init__(self):
-        self.screen_height = 600
-        self.screen_width = 1000
+        self.screen_height = 765
+        self.screen_width = 1350
+        self.HOST_IP = socket.gethostbyname('localhost') #replace 'localhost' with socket.gethostname() for other laptops
+        self.HOST_PORT = 12345
+        self.ENCODER = 'utf-8'
         self.background_image = None
 
         self.playerNumber = 1
