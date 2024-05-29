@@ -1,7 +1,7 @@
 import pygame
 
 class Topping():
-    
+
     def __init__(self, image_filepath:str, location:tuple, screen:pygame.display, c):
         one_topping_img = pygame.image.load(image_filepath)
         self.one_topping_image = pygame.transform.scale(one_topping_img, (30, 30))
@@ -27,4 +27,5 @@ class Topping():
         # display new topping that's being dragged
         x_pos, y_pos = pygame.mouse.get_pos()
         self.screen.blit(self.one_topping_image, (x_pos, y_pos))
+
         

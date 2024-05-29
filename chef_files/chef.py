@@ -9,6 +9,7 @@ class Chef:
     
     
     # show the current pizza (needed for erasing cutting line)
+
     def display_current_pizza(self, curr_toppings:list):
         # clear the screen (background + plain pizza displayed)
         self.screen.blit(self.c.background_image, (0, 0))
@@ -24,6 +25,7 @@ class Chef:
             
         """
         use the code below to make the topping_boxes code more concise if time
+
         for tb in self.c.topping_boxes:
             self.screen.blit(tb[0], tb[1])
         """

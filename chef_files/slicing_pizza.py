@@ -9,8 +9,10 @@ class SlicingPizza(Chef):
         self.number_cuts_left = num_cuts
         self.pizza_image_location = (260, 60)
         self.background_image = None
+
         
         self.curr_toppings = []
+
         
         super().__init__(screen, self.c)
     
