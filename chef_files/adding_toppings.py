@@ -9,6 +9,7 @@ class AddingToppings(Chef):
         self.c = c
         self.pizza_image_location = (295, 65)
         self.background_image = None
+
         
         # contains a list of all toppings
         self.topping_boxes = []
@@ -44,7 +45,7 @@ class AddingToppings(Chef):
     # switch the background to the toppings board
     def bg_to_toppings_board(self):
         self.background_image = self.change_background("background images/kitchen backgrounds/Kitchen - Ingredients BG.png")
-        
+
     
     # have the pizza fly in initially
     def pizza_fly_in(self):

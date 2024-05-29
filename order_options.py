@@ -255,8 +255,10 @@ class orderOptions:
     def sliceSelect (self, click):
         self.sliceBG = pygame.image.load(os.path.join("pictures", "ticketSliceBG.png"))
         self.sliceColor = (97, 71, 24)
+
         x = self.sliceArea.x
         y = self.sliceArea.y
+
 
         if (click == 1):
             self.screen.blit(self.sliceBG, (x, y))
