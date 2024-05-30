@@ -287,6 +287,7 @@ class orderOptions:
         c.ticketSave
         data = c.VALUES_JSON
 
+        # aarna fix this please
         n = network.Network()
         n.connect()
         n.send(data)
