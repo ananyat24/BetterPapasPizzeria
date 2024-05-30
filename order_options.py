@@ -2,6 +2,7 @@ import pygame
 import os
 from constants import Constants
 import sys
+import network
 
 class orderOptions:
     def __init__(self):
@@ -76,8 +77,9 @@ class orderOptions:
         self.multiplierArea7 = pygame.Rect(1270, 466, 55, 50)
 
         self.sliceArea = pygame.Rect(1230, 525, 85, 83)
+        self.completeButton = pygame.Rect(1050, 610, 280, 55)
 
-        # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.sliceArea), 10)
+        # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.completeButton), 10)
 
     def update(self):
         c = Constants()
@@ -280,6 +282,16 @@ class orderOptions:
             pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
 
         self.update()
+
+    def onComplete (self):
+        c = Constants()
+        c.ticketLoad
+        c.ticketSave
+        data = c.VALUES_JSON
+
+        n = network.Network()
+        n.connect()
+        n.send(data)
             
     def run(self):
         self.setup()
@@ -387,7 +399,39 @@ class orderOptions:
                     elif self.sliceArea.collidepoint(pygame.mouse.get_pos()):
                         self.sliceCount +=1
                         self.sliceSelect(self.sliceCount % 4)
-            
+
+                    elif self.completeButton.collidepoint(pygame.mouse.get_pos()):
+                        self.onComplete() # send ticket to chef
+
+                        self.TA1count = 0
+                        self.TA2count = 0
+                        self.TA3count = 0
+                        self.TA4count = 0
+                        self.TA5count = 0
+                        self.TA6count = 0
+                        self.TA7count = 0
+                        self.TA8count = 0
+                        self.MA1count = 0
+                        self.MA2count = 0
+                        self.MA3count = 0
+                        self.MA4count = 0
+                        self.MA5count = 0
+                        self.MA6count = 0
+                        self.MA7count = 0
+                        self.MA8count = 0
+                        self.IA1count = 0
+                        self.IA2count = 0
+                        self.IA3count = 0
+                        self.IA4count = 0
+                        self.IA5count = 0
+                        self.IA6count = 0
+                        self.IA7count = 0
+                        self.IA8count = 0
+                        self.sliceCount = 0
+
+                        self.update()
+                        self.setup()
+                
             pygame.display.flip()
 
             if reload: break
@@ -409,4 +453,3 @@ class orderOptions:
 if __name__ == "__main__":
     c = orderOptions()
     c.run()
-
