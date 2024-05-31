@@ -19,7 +19,7 @@ except socket.error as e:
 server_socket.listen()
 print("Waiting for a connection, Server Started")
 
-role = ["chef", "waiter", "farmer"]
+role = ["chef", "waiter"]
 
 def threaded_client(conn, player):
     # conn.send(str.encode(make_pos(pos[player])))
@@ -44,11 +44,13 @@ def threaded_client(conn, player):
                 
                 if data["key"] == "right":
                     data["role"] = "chef"
+                    print('MAKING ROLE CHEF')
                     if "chef" in data["remaining_roles"]:
                         data["remaining_roles"].remove("chef")
                     # data["key"] = None
 
-                if data["key"] == "up":
+                if data["key"] == "continue":
+                    print("in continue")
                     if data["role"] == "waiter":
                         data["stage"] = "waiter1"
                         data["key"] = None
@@ -56,6 +58,7 @@ def threaded_client(conn, player):
                     if data["role"] == "chef":
                         data["stage"] = "chef1"
                         data["key"] = None
+                        print("chef stage beginning")
 
                 # if data["key"] == "left":
                 #     data["role"] = "waiter"

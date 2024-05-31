@@ -13,14 +13,23 @@ pygame.font.init()
 c = Constants()
 screen = pygame.display.set_mode((c.screen_width, c.screen_height))
 homescreen_image = pygame.image.load("background images/Homescreen.png")
-# homescreen_image = pygame.image.load(os.path.join("background images", "Homescreen.png"))
-# homescreen_image = pygame.transform.scale(homescreen_image, (c.screen_width, c.screen_height))
-home_screen_1 = pygame.image.load("background images/Homescreen.png")
 role_selection_us = pygame.image.load("background images/role_selection_bg.png") # background image for when no characters have been selected
-role_selection_ch = pygame.image.load("background images/role_selection_bg_waiter.png") # background image for when waiter has been selected
-role_selection_wa = pygame.image.load("background images/role_selection_bg_chef.png") # background image for when chef has been selected
+role_selection_ch = pygame.image.load("background images/role_selection_bg_chef.png") # background image for when waiter has been selected
+role_selection_wa = pygame.image.load("background images/role_selection_bg_waiter.png") # background image for when chef has been selected
 waiter = orderOptions()
 chef = Chef()
+
+
+intro_begin_btn = pygame.Rect(475, 425, 410, 80)
+intro_settings_btn = pygame.Rect(475, 550, 410, 80)
+intro_tutorial_btn = pygame.Rect(475, 670, 410, 80)
+
+selection_chef_btn = pygame.Rect(1010, 650, 260, 100)
+selection_waiter_btn = pygame.Rect(105, 650, 260, 100)
+selection_continue_btn = pygame.Rect(510, 340, 360, 130)
+
+
+
 
 # intialize all the variables
 gameloop = True
@@ -32,6 +41,7 @@ n = Network()
 n.connect()
 
 data = {"stage":"intro", "key": None, "role": None, "remaining_roles": ["waiter", "chef"]}
+cur_screen = "unselected"
 
 # gameloop
 while gameloop:
@@ -43,7 +53,13 @@ while gameloop:
 
         if data["stage"] == "intro":
             screen.blit(homescreen_image, (0,0))
-            # print("should be displaying intro????")
+            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(intro_begin_btn), 10)
+            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(intro_settings_btn), 10)
+            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(intro_tutorial_btn), 10)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if intro_begin_btn.collidepoint(pygame.mouse.get_pos()):
+                    data["stage"] = "selection"
+            pygame.display.update()
 
         # height = 50
         # # if data["role"] == None:
@@ -64,48 +80,71 @@ while gameloop:
         #     height += 100
 
         elif data["stage"] == "selection":
+            
 
-            if len(data["remaining_roles"]) == 2:
-                screen.blit(homescreen_image, (0,0))
+            if cur_screen == "unselected":
+                screen.blit(role_selection_us, (0,0))
 
-            else:
-                if data["remaining_roles"][0] == "chef":
+            elif cur_screen == "waiter_selected":
                     screen.blit(role_selection_wa, (0,0))
-                else:
+                   
+            else:
                     screen.blit(role_selection_ch, (0,0))
                 
+            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(selection_chef_btn), 10)
+            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(selection_waiter_btn), 10)
+            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(selection_continue_btn), 10)
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if selection_chef_btn.collidepoint(pygame.mouse.get_pos()):
+                    cur_screen = "chef_selected"
+                    data["key"] = "right"
+                    data = n.send(data)
+                
+
+                if selection_waiter_btn.collidepoint(pygame.mouse.get_pos()):
+                    cur_screen = "waiter_selected"
+                    data["key"] = "left"
+                    data = n.send(data)
+                    
+                if selection_continue_btn.collidepoint(pygame.mouse.get_pos()):
+                    data["key"] = "continue"
+                    print("Continue selected")
+                    print(data["role"])
+                    data = n.send(data)
+                    print(data["stage"])
 
             pygame.display.update()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    if data["key"] != "left":
-                        data["remaining_roles"] = ["waiter", "chef"]
-                        data["key"] = "left"
-                        # print(data)
-                        data = n.send(data)
-                        # print("#2: ")
-                        #print(data)
-                    if data["key"] != "left":
-                        data["remaining_roles"] = ["waiter", "chef"]
-                        data["key"] = "left"
-                        # print(data)
-                        data = n.send(data)
-                        # print("#2: ")
-                        #print(data)
-                if event.key == pygame.K_RIGHT:
-                    if data["key"] != "right":
-                        data["remaining_roles"] = ["waiter", "chef"]
-                        data["key"] = "right"
-                        data = n.send(data)
-                if event.key == pygame.K_UP:
-                    data["key"] = "up"
-                    if data["key"] != "right":
-                        data["remaining_roles"] = ["waiter", "chef"]
-                        data["key"] = "right"
-                        data = n.send(data)
-                if event.key == pygame.K_UP:
-                    data["key"] = "up"
-                    data = n.send(data)
+            # if event.type == pygame.KEYDOWN:
+            #     if event.key == pygame.K_LEFT:
+            #         if data["key"] != "left":
+            #             data["remaining_roles"] = ["waiter", "chef"]
+            #             data["key"] = "left"
+            #             # print(data)
+            #             data = n.send(data)
+            #             # print("#2: ")
+            #             #print(data)
+            #         if data["key"] != "left":
+            #             data["remaining_roles"] = ["waiter", "chef"]
+            #             data["key"] = "left"
+            #             # print(data)
+            #             data = n.send(data)
+            #             # print("#2: ")
+            #             #print(data)
+            #     if event.key == pygame.K_RIGHT:
+            #         if data["key"] != "right":
+            #             data["remaining_roles"] = ["waiter", "chef"]
+            #             data["key"] = "right"
+            #             data = n.send(data)
+            #     if event.key == pygame.K_UP:
+            #         data["key"] = "up"
+            #         if data["key"] != "right":
+            #             data["remaining_roles"] = ["waiter", "chef"]
+            #             data["key"] = "right"
+            #             data = n.send(data)
+            #     if event.key == pygame.K_UP:
+            #         data["key"] = "up"
+            #         data = n.send(data)
             
 
 
