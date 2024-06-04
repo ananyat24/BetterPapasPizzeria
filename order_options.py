@@ -147,35 +147,21 @@ class orderOptions:
             self.screen.blit(self.TA, (x+20, y-3))
         
         elif (click == 5):
-<<<<<<< HEAD
             self.screen.blit(self.TAbg, (x+2, y+7))
             self.screen.blit(self.TA, (x+20, y+19))
-=======
-            self.screen.blit(self.TAbg, (x+2, y+3))
-            self.screen.blit(self.TA, (x+16, y+16))
->>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x+20, y-3))
 
         elif (click == 6):
-<<<<<<< HEAD
             self.screen.blit(self.TAbg, (x+2, y+7))
-=======
-            self.screen.blit(self.TAbg, (x+2, y+3))
->>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
             self.TA = pygame.transform.flip(self.TA, True, False)
             self.screen.blit(self.TA, (x-2, y+19))
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x-2, y-3))
 
         elif (click == 0):
-<<<<<<< HEAD
             self.screen.blit(self.TAbg, (x+2, y+7))
             self.screen.blit(self.TA, (x+20, y+19))
-=======
-            self.screen.blit(self.TAbg, (x+2, y+3))
-            self.screen.blit(self.TA, (x+16, y+16))
->>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x+20, y-3))
             self.TA = pygame.transform.flip(self.TA, True, True)
@@ -223,7 +209,6 @@ class orderOptions:
             self.screen.blit(self.artichoke, (x, y))
 
         elif (click == 2):
-<<<<<<< HEAD
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 50, 47))
             self.screen.blit(self.mushroom, (x, y))
 
@@ -249,33 +234,6 @@ class orderOptions:
 
         elif (click == 0):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 50, 42))
-=======
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
-            self.screen.blit(self.mushroom, (x, y))
-
-        elif (click == 3):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
-            self.screen.blit(self.olive, (x, y))
-
-        elif (click == 4):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
-            self.screen.blit(self.onions, (x, y))
-
-        elif (click == 5):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
-            self.screen.blit(self.pepperoni, (x, y))
-
-        elif (click == 6):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
-            self.screen.blit(self.pineapple, (x, y))
-
-        elif (click == 7):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
-            self.screen.blit(self.spinach, (x, y))
-
-        elif (click == 0):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y+2, 38, 38))
->>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
             self.screen.blit(self.tomato, (x, y))
 
         self.update()
@@ -304,7 +262,6 @@ class orderOptions:
             self.screen.blit(self.M1X, (x, y))
 
         elif (click == 2):
-<<<<<<< HEAD
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 55, 50))
             self.screen.blit(self.M2X, (x, y))
 
@@ -314,17 +271,6 @@ class orderOptions:
 
         elif (click == 0):
             pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 55, 50))
-=======
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
-            self.screen.blit(self.M2X, (x, y))
-
-        elif (click == 3):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
-            self.screen.blit(self.M3X, (x, y))
-
-        elif (click == 0):
-            pygame.draw.rect(self.screen, self.bgColor, pygame.Rect(x, y, 35, 35))
->>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
             self.screen.blit(self.M4X, (x, y))
 
         self.update()
@@ -355,7 +301,6 @@ class orderOptions:
             pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
 
         self.update()
-<<<<<<< HEAD
 
     def onComplete (self):
         c = Constants()
@@ -367,8 +312,6 @@ class orderOptions:
         n = network.Network()
         n.connect()
         n.send(data)
-=======
->>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
             
     def run(self):
         self.setup()
@@ -476,7 +419,6 @@ class orderOptions:
                     elif self.sliceArea.collidepoint(pygame.mouse.get_pos()):
                         self.sliceCount +=1
                         self.sliceSelect(self.sliceCount % 4)
-<<<<<<< HEAD
 
                     elif self.completeButton.collidepoint(pygame.mouse.get_pos()):
                         self.onComplete() # send ticket to chef
@@ -510,9 +452,6 @@ class orderOptions:
                         self.update()
                         self.setup()
                 
-=======
-            
->>>>>>> af33859 (send ticket values to library to share with another player. fix #27)
             pygame.display.flip()
 
             if reload: break
