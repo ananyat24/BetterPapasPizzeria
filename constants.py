@@ -1,4 +1,5 @@
 # store all constants used across multiple files here
+import socket
 
 # also store variables that are changed throughout code but needed in multiple files here
 
@@ -18,6 +19,7 @@ class Constants():
         self.HOST_IP = socket.gethostbyname('localhost') #replace 'localhost' with socket.gethostname() for other laptops
         self.HOST_PORT = 12345
         self.ENCODER = 'utf-8'
+<<<<<<< HEAD
         self.background_image = None
 
         self.playerNumber = 1
@@ -44,3 +46,6 @@ class Constants():
     def ticketSave(self):
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "values.json"), "w") as f:
             json.dump(self.VALUES_JSON, f)
+=======
+        
+>>>>>>> ec6bec4 (Succesfully implemented socket and threading test)
