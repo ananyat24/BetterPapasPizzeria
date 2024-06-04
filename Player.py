@@ -41,7 +41,7 @@ class Player:
             self.current_sheet = self.spritesheet_frames
             for i in range(len(self.spritesheet_frames)):
                 self.current_frame = self.curr_sheet[i]
-                
+
         
         if self.action == "joy_taking_order":
             self.spritesheet = pygame.image.load(os.path.join("Images", "joyspritesheet3.png"))
@@ -66,7 +66,28 @@ class Player:
             self.current_sheet = self.spritesheet_frames
             for i in range(len(self.spritesheet_frames)):
                 self.current_frame = self.curr_sheet[i]
+
+        if self.action == "bertha_smiling":
+            self.spritesheet = pygame.image.load(os.path.join("Images", "berthaspritesheet_happy.png"))
+            self.spritesheet=pygame.transform.scale(self.spritesheet, (409, 183))
+            self.spritesheet_frames = [self.spritesheet.subsurface((i * (self.spritesheet.get_width() // 4), 0, self.spritesheet.get_width() // 4, self.spritesheet.get_height())) for i in range(4)]
+            self.current_sheet = self.spritesheet_frames
+            for i in range(len(self.spritesheet_frames)):
+                self.current_frame = self.curr_sheet[i]
         
+        if self.action == "bertha_angry":
+            self.spritesheet = pygame.image.load(os.path.join("Images", "berthaspritesheet_angry.png"))
+            self.spritesheet=pygame.transform.scale(self.spritesheet, (409, 183))
+            self.spritesheet_frames = [self.spritesheet.subsurface((i * (self.spritesheet.get_width() // 6), 0, self.spritesheet.get_width() // 6, self.spritesheet.get_height())) for i in range(6)]
+            self.current_sheet = self.spritesheet_frames
+            for i in range(len(self.spritesheet_frames)):
+                self.current_frame = self.curr_sheet[i] 
+
+        if self.action == "bertha_walking":
+            self.spritesheet = pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
+            self.spritesheet=pygame.transform.scale(self.spritesheet, (118, 212))
+
+
 
 
 
