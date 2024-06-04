@@ -8,7 +8,6 @@ from chef_main import Chef
 # create the screen
 pygame.init()
 pygame.font.init() 
-pygame.font.init() 
 c = Constants()
 screen = pygame.display.set_mode((c.screen_width, c.screen_height))
 homescreen_image = pygame.image.load("background images/Homescreen.png")
@@ -28,6 +27,9 @@ data = {"stage":"intro", "key": None, "role": None, "remaining_roles": ["waiter"
 
 # gameloop
 while gameloop:
+    
+
+
     
 
 
