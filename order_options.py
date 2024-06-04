@@ -4,7 +4,7 @@ from constants import Constants
 import sys
 import network
 
-class orderOptions:
+class orderOptions = 
     def __init__(self):
         pygame.init()
 
@@ -454,3 +454,87 @@ class orderOptions:
 if __name__ == "__main__":
     c = orderOptions()
     c.run()
+
+    #orders
+
+Order1 =  "6 artichokes and 4 mushrooms on half pizza. Cut in 6 slices. 30 minutes"
+Order2 =  "8 olives on full pizza. Cut in 8 slices. 45 minutes"
+Order3 =  "5 spinach and 7 tomatoes on half pizza. Cut in 4 slices. 15 minutes"
+Order4 =  "10 pepperoni and 3 onions on full pizza. Cut in 8 slices. 60 minutes"
+Order5 =  "7 artichokes, 5 mushrooms, and 4 spinach on full pizza. Cut in 6 slices. 30 minutes"
+Order6 =  "9 pineapple and 6 olives on full pizza. Cut in 8 slices. 45 minutes"
+Order7 =  "4 tomatoes and 8 spinach on half pizza. Cut in 2 slices. 15 minutes"
+Order8 =  "7 olives, 3 pepperoni, and 5 mushrooms on full pizza. Cut in 4 slices. 60 minutes"
+Order9 =  "10 onions and 5 artichokes on half pizza. Cut in 6 slices. 30 minutes"
+Order10 =  "6 spinach and 9 mushrooms on full pizza. Cut in 8 slices. 45 minutes"
+Order11 =  "8 pepperoni and 5 pineapple on half pizza. Cut in 4 slices. 60 minutes"
+Order12 =  "7 olives, 2 onions, and 5 tomatoes on full pizza. Cut in 6 slices. 45 minutes"
+Order13 =  "9 artichokes on full pizza. Cut in 8 slices. 30 minutes"
+Order14 =  "4 pineapple, 5 mushrooms, and 3 spinach each on different quarters of pizza. Cut in 4 slices. 60 minutes"
+Order15 =  "6 onions, 7 tomatoes, and 8 olives on full pizza. Cut in 8 slices. 45 minutes"
+Order16 =  "5 spinach and 3 artichokes on half pizza. Cut in 2 slices. 15 minutes"
+Order17 =  "8 mushrooms and 4 onions on full pizza. Cut in 6 slices. 60 minutes"
+Order18 =  "7 tomatoes and 5 pepperoni on half pizza. Cut in 8 slices. 45 minutes"
+Order19 =  "6 pineapple, 3 spinach, and 4 artichokes on full pizza. Cut in 4 slices. 30 minutes"
+Order20 =  "9 mushrooms and 2 onions on half pizza. Cut in 6 slices. 60 minutes"
+Order21 =  "5 artichokes and 6 mushrooms on full pizza. Cut in 8 slices. 45 minutes"
+Order22 =  "7 olives and 3 tomatoes on half pizza. Cut in 4 slices. 15 minutes"
+Order23 =  "8 pepperoni and 5 onions on full pizza. Cut in 6 slices. 30 minutes"
+Order24 =  "4 spinach and 7 pineapple on half pizza. Cut in 2 slices. 60 minutes"
+Order25 =  "6 tomatoes, 5 mushrooms, and 4 olives on full pizza. Cut in 8 slices. 45 minutes"
+Order26 =  "10 artichokes and 3 spinach on full pizza. Cut in 6 slices. 30 minutes"
+Order27 =  "5 pineapple and 7 olives on half pizza. Cut in 4 slices. 15 minutes"
+Order28 =  "6 onions and 8 tomatoes on full pizza. Cut in 8 slices. 60 minutes"
+Order29 =  "7 mushrooms and 4 pepperoni on half pizza. Cut in 6 slices. 45 minutes"
+Order30 =  "9 spinach and 2 artichokes on full pizza. Cut in 4 slices. 30 minutes"
+Order31 =  "5 onions and 6 pineapple on full pizza. Cut in 6 slices. 60 minutes"
+Order32 =  "8 mushrooms and 3 tomatoes on half pizza. Cut in 4 slices. 15 minutes"
+Order33 =  "7 artichokes and 5 pepperoni on full pizza. Cut in 8 slices. 45 minutes"
+Order34 =  "4 spinach and 6 olives on half pizza. Cut in 2 slices. 30 minutes"
+Order35 =  "9 onions and 5 pineapple on full pizza. Cut in 8 slices. 60 minutes"
+Order36 =  "6 tomatoes and 8 artichokes on full pizza. Cut in 6 slices. 45 minutes"
+Order37 =  "5 mushrooms and 7 spinach on half pizza. Cut in 4 slices. 15 minutes"
+Order38 =  "10 olives and 3 onions on full pizza. Cut in 8 slices. 30 minutes"
+Order39 =  "4 artichokes and 8 pineapple on full pizza. Cut in 6 slices. 60 minutes"
+Order40 =  "6 pepperoni and 5 mushrooms on half pizza. Cut in 2 slices. 45 minutes"
+Order41 =  "7 spinach and 3 tomatoes on full pizza. Cut in 8 slices. 30 minutes"
+Order42 =  "5 onions and 8 olives on half pizza. Cut in 4 slices. 60 minutes"
+Order43 =  "6 artichokes and 7 pineapple on full pizza. Cut in 8 slices. 45 minutes"
+Order44 =  "4 spinach and 5 pepperoni on half pizza. Cut in 6 slices. 30 minutes"
+Order45 =  "9 mushrooms and 8 tomatoes on full pizza. Cut in 8 slices. 45 minutes"
+Order46 =  "7 olives and 6 onions on half pizza. Cut in 4 slices. 60 minutes"
+Order47 =  "5 artichokes and 4 spinach on full pizza. Cut in 8 slices. 15 minutes"
+Order48 =  "6 pineapple and 8 pepperoni on half pizza. Cut in 6 slices. 45 minutes"
+Order49 =  "7 tomatoes and 5 mushrooms on full pizza. Cut in 4 slices. 30 minutes"
+Order50 =  "10 olives and 6 onions on half pizza. Cut in 2 slices. 60 minutes"
+Order51 =  "4 spinach and 8 artichokes on full pizza. Cut in 8 slices. 45 minutes"
+Order52 =  "5 pineapple and 7 olives on half pizza. Cut in 4 slices. 15 minutes"
+Order53 =  "9 mushrooms and 6 tomatoes on full pizza. Cut in 8 slices. 30 minutes"
+Order54 =  "7 onions and 4 pepperoni on half pizza. Cut in 6 slices. 60 minutes"
+Order55 =  "8 artichokes and 5 spinach on full pizza. Cut in 8 slices. 45 minutes"
+Order56 =  "6 olives and 7 pineapple on half pizza. Cut in 2 slices. 15 minutes"
+Order57 =  "5 mushrooms and 8 tomatoes on full pizza. Cut in 6 slices. 30 minutes"
+Order58 =  "4 onions and 9 pepperoni on half pizza. Cut in 4 slices. 60 minutes"
+Order59 =  "7 artichokes and 6 spinach on full pizza. Cut in 8 slices. 45 minutes"
+Order60 =  "5 olives and 4 mushrooms on half pizza. Cut in 2 slices. 15 minutes"
+Order61 =  "8 pineapple and 7 onions on full pizza. Cut in 6 slices. 30 minutes"
+Order62 =  "6 tomatoes and 5 pepperoni on half pizza. Cut in 6 slices. 60 minutes"
+Order63 =  "7 mushrooms and 4 spinach on full pizza. Cut in 8 slices. 45 minutes"
+Order64 =  "5 artichokes and 6 olives on half pizza. Cut in 4 slices. 30 minutes"
+Order65 =  "8 onions and 9 pineapple on full pizza. Cut in 6 slices. 60 minutes"
+Order66 =  "7 tomatoes and 5 spinach on half pizza. Cut in 4 slices. 45 minutes"
+Order67 =  "6 pepperoni and 4 mushrooms on full pizza. Cut in 8 slices. 15 minutes"
+Order68 =  "10 olives and 3 onions on half pizza. Cut in 6 slices. 30 minutes"
+Order69 =  "5 artichokes and 6 pineapple on full pizza. Cut in 8 slices. 60 minutes"
+Order70 =  "8 mushrooms and 7 spinach on half pizza. Cut in 4 slices. 45 minutes"
+Order71 =  "6 olives and 5 tomatoes on full pizza. Cut in 6 slices. 30 minutes"
+Order72 =  "7 onions and 4 artichokes on half pizza. Cut in 2 slices. 15 minutes"
+Order73 =  "9 pepperoni and 8 pineapple on full pizza. Cut in 8 slices. 60 minutes"
+Order74 =  "5 spinach and 6 mushrooms on half pizza. Cut in 6 slices. 45 minutes"
+Order75 =  "8 tomatoes and 7 olives on full pizza. Cut in 4 slices. 30 minutes"
+
+
+
+
+
+    
