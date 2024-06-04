@@ -12,7 +12,7 @@ gameloop = True
 # variables for chef character
 cutting_pizza = False
 x_org, y_org = None, None
-chef_slicing_pizza = SlicingPizza(screen, 3)
+chef_slicing_pizza = SlicingPizza(screen, 3, c)
 
 # display whole pizza before the cutting process
 pizza_image = pygame.image.load("pictures/plain_pizza_pic.png")
