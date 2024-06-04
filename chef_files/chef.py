@@ -23,13 +23,6 @@ class Chef:
         for line in self.c.lines:
             pygame.draw.line(line[0], line[1], line[2], line[3], line[4])
             
-        """
-        use the code below to make the topping_boxes code more concise if time
-
-        for tb in self.c.topping_boxes:
-            self.screen.blit(tb[0], tb[1])
-        """
-            
             
     # add new images to the screen
     def add_pizza_image(self, image, location:tuple): # locations is a list of tuples in the form (x_pos, y_pos)
