@@ -48,11 +48,6 @@ class orderOptions:
         self.sliceCount = 0
         self.timerCount = 0
 
-    def setup(self):
-        self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
-        self.bg = pygame.transform.scale(self.bg, (self.WIDTH, self.HEIGHT))
-        self.screen.blit(self.bg, (0, 0))
-
         self.toppingArea1 = pygame.Rect(1054, 155, 65, 55)
         self.toppingArea2 = pygame.Rect(1054, 206, 65, 55)
         self.toppingArea3 = pygame.Rect(1054, 257, 65, 55)
@@ -82,6 +77,11 @@ class orderOptions:
         self.timerArea = pygame.Rect(1075, 525, 82, 73)
 
         # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.completeButton), 10)
+
+    def setup(self):
+        self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
+        self.bg = pygame.transform.scale(self.bg, (self.WIDTH, self.HEIGHT))
+        self.screen.blit(self.bg, (0, 0))
 
     def update(self):
         c = Constants()

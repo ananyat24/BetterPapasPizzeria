@@ -33,8 +33,7 @@ class Constants():
         self.VALUES_JSON = {}
         self.VALUES = {}
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "values.json")) as f:
-            #self.VALUES_JSON = json.load(f)
-            pass
+            self.VALUES_JSON = json.load(f)
 
     def ticketLoad(self):
         self.VALUES = self.VALUES_JSON.copy()
