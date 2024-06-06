@@ -46,6 +46,7 @@ class orderOptions:
         self.IA8count = 0
 
         self.sliceCount = 0
+        self.timerCount = 0
 
     def setup(self):
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
@@ -78,6 +79,7 @@ class orderOptions:
 
         self.sliceArea = pygame.Rect(1230, 525, 85, 83)
         self.completeButton = pygame.Rect(1050, 610, 280, 55)
+        self.timerArea = pygame.Rect(1075, 525, 82, 73)
 
         # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.completeButton), 10)
 
@@ -92,7 +94,7 @@ class orderOptions:
                        "S5": self.TA5count, "T5": self.IA5count, "M5": self.MA5count,
                        "S6": self.TA6count, "T6": self.IA6count, "M6": self.MA6count,
                        "S7": self.TA7count, "T7": self.IA7count, "M7": self.MA7count,
-                       "CUTS": self.sliceCount
+                       "CUTS": self.sliceCount, "TIME": self.timerCount
                        }
         
         c.ticketLoad()
@@ -109,7 +111,7 @@ class orderOptions:
                        "S5": self.TA5count, "T5": self.IA5count, "M5": self.MA5count,
                        "S6": self.TA6count, "T6": self.IA6count, "M6": self.MA6count,
                        "S7": self.TA7count, "T7": self.IA7count, "M7": self.MA7count,
-                       "CUTS": self.sliceCount
+                       "CUTS": self.sliceCount, "TIME": self.timerCount
                        }
         
         c.ticketLoad()
@@ -276,30 +278,59 @@ class orderOptions:
         self.update()
 
     def sliceSelect (self, click):
-        self.sliceBG = pygame.image.load(os.path.join("pictures", "ticketSliceBG.png"))
+        self.sliceBG = pygame.image.load(os.path.join("pictures", "ticketSliceBG.jpg"))
+        self.sliceBG = pygame.transform.scale(self.sliceBG, (82, 80))
         self.sliceColor = (97, 71, 24)
 
-        x = self.sliceArea.x
-        y = self.sliceArea.y
-
+        x = self.sliceArea.x - 3.5
+        y = self.sliceArea.y - 6.5
 
         if (click == 1):
             self.screen.blit(self.sliceBG, (x, y))
-            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+43, y+9, 2, 70))
 
         elif (click == 2):
-            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+8, y+45, 70, 2))
 
         elif (click == 3):
             self.screen.blit(self.sliceBG, (x, y))
-            pygame.draw.line(self.screen, self.sliceColor, (x+20, y+17), (x+55, y+51), 3)
-            pygame.draw.line(self.screen, self.sliceColor, (x+58, y+19), (x+21, y+51), 3)
-            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
+            pygame.draw.line(self.screen, self.sliceColor, (x+17, y+21), (x+70, y+66), 3)
+            pygame.draw.line(self.screen, self.sliceColor, (x+70, y+21), (x+20, y+70), 3)
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+43, y+9, 2, 70))
 
         elif (click == 0):
-            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+38, y+5, 2, 56))
-            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+12, y+33, 53, 2))
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+43, y+9, 2, 70))
+            pygame.draw.rect(self.screen, self.sliceColor, pygame.Rect(x+8, y+45, 70, 2))
 
+        self.update()
+
+    def timerSelect (self, click):
+        self.timeBG = pygame.image.load(os.path.join("pictures", "ticketSliceBG.jpg"))
+        self.timeBG = pygame.transform.scale(self.timeBG, (82, 80))
+        self.timeHand = pygame.image.load(os.path.join("pictures", "timerHand.png"))
+        self.timeHand = pygame.transform.scale(self.timeHand, (8, 35))
+
+        x = self.timerArea.x - 3.5
+        y = self.timerArea.y - 6.5
+
+        if (click == 1):
+            self.screen.blit(self.timeBG, (x+5, y))
+            self.screen.blit(self.timeHand, (x+44, y+13))
+
+        elif (click == 2):
+            self.screen.blit(self.timeBG, (x+5, y))
+            self.timeHand = pygame.transform.rotate(self.timeHand, 270)
+            self.screen.blit(self.timeHand, (x+45, y+40))
+
+        elif (click == 3):
+            self.screen.blit(self.timeBG, (x+5, y))
+            self.timeHand = pygame.transform.rotate(self.timeHand, 180)
+            self.screen.blit(self.timeHand, (x+46, y+40))
+
+        elif (click == 0):
+            self.screen.blit(self.timeBG, (x+5, y))
+            self.timeHand = pygame.transform.rotate(self.timeHand, 90)
+            self.screen.blit(self.timeHand, (x+20, y+40))
         self.update()
 
     def onComplete (self):
@@ -420,6 +451,10 @@ class orderOptions:
                         self.sliceCount +=1
                         self.sliceSelect(self.sliceCount % 4)
 
+                    elif self.timerArea.collidepoint(pygame.mouse.get_pos()):
+                        self.timerCount +=1
+                        self.timerSelect(self.timerCount % 4)
+
                     elif self.completeButton.collidepoint(pygame.mouse.get_pos()):
                         self.onComplete() # send ticket to chef
 
@@ -448,6 +483,7 @@ class orderOptions:
                         self.IA7count = 0
                         self.IA8count = 0
                         self.sliceCount = 0
+                        self.timerCount = 0
 
                         self.update()
                         self.setup()
@@ -464,7 +500,7 @@ class orderOptions:
                         "S5": self.TA5count, "T5": self.IA5count, "M5": self.MA5count,
                         "S6": self.TA6count, "T6": self.IA6count, "M6": self.MA6count,
                         "S7": self.TA7count, "T7": self.IA7count, "M7": self.MA7count,
-                        "CUTS": self.sliceCount
+                        "CUTS": self.sliceCount, "TIME": self.timerCount
                         }
     
         c.ticketLoad()
