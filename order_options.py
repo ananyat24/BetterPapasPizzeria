@@ -100,23 +100,6 @@ class orderOptions:
         c.ticketLoad()
         c.ticketSave()
 
-    def update(self):
-        c = Constants()
-        
-        c.VALUES_JSON = {
-                       "S1": self.TA1count, "T1": self.IA1count, "M1": self.MA1count,
-                       "S2": self.TA2count, "T2": self.IA2count, "M2": self.MA2count,
-                       "S3": self.TA3count, "T3": self.IA3count, "M3": self.MA3count,
-                       "S4": self.TA4count, "T4": self.IA4count, "M4": self.MA4count,
-                       "S5": self.TA5count, "T5": self.IA5count, "M5": self.MA5count,
-                       "S6": self.TA6count, "T6": self.IA6count, "M6": self.MA6count,
-                       "S7": self.TA7count, "T7": self.IA7count, "M7": self.MA7count,
-                       "CUTS": self.sliceCount, "TIME": self.timerCount
-                       }
-        
-        c.ticketLoad()
-        c.ticketSave()
-
     def toppingArea(self, x, y, click, color):
         self.TA = pygame.image.load(os.path.join("pictures", "toppingAreaImage.png"))
         self.TA = pygame.transform.scale(self.TA, (43, 43))
@@ -170,8 +153,6 @@ class orderOptions:
             self.screen.blit(self.TA, (x-2, y+19))
             self.TA = pygame.transform.flip(self.TA, False, True)
             self.screen.blit(self.TA, (x-2, y-3))
-
-        self.update()
 
         self.update()
 
