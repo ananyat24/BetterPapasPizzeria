@@ -10,7 +10,7 @@ class Network():
         self.server = socket.gethostbyname('localhost')
         self.id = c.HOST_IP
         self.port = c.HOST_PORT
-        self.encoder = c.ENCODER   
+        self.encoder = c.ENCODER
         self.role = None
 
         self.addr = (self.server, self.port)
