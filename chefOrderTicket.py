@@ -3,7 +3,6 @@ import os
 from constants import Constants
 import sys
 import order_options
-import json
 
 class orderTicketFill:
     def __init__(self):
@@ -33,8 +32,8 @@ class orderTicketFill:
         self.screen.blit(self.bg, (0, 0))
 
     def fillArea (self):
-        x = 780
-        y = 160
+        x = 1060
+        y = 162
         color = 0
         click = 0
         value = 0
@@ -51,13 +50,13 @@ class orderTicketFill:
                 color =1
 
             if i != 0:
-                self.order.toppingArea(x, (y + (40*(value/3))), click, color)
+                self.order.toppingArea(x, (y + (45*(value/3)) + 2*(value-2)), click, color)
             
             value += 1
 
     def fillToppings (self):
-        x = 840
-        y = 160
+        x = 1140
+        y = 149
         color = 0
         click = 0
         value = 0
@@ -74,13 +73,13 @@ class orderTicketFill:
                 color = 0
 
             if i != 0:
-                self.order.ingredientArea(x, (y + (40*(value/3))), click, color)
+                self.order.ingredientArea(x, (y + (45*(value/3)) + 2*(value-2)), click, color)
             
             value += 1
 
     def fillMultiplier (self):
-        x = 940
-        y = 160
+        x = 1265
+        y = 133
         color = 0
         click = 0
         value = 0
@@ -97,22 +96,36 @@ class orderTicketFill:
                 color = 1
 
             if i != 0:
-                self.order.multiplierArea(x, (y + (40*(value/3))), click, color)
+                self.order.multiplierArea(x, (y + (45*(value/3)) + 2*(value-2)), click, color)
             
             value += 1
         
     def fillSlices (self):
         click = self.valueList[21]
+
+        self.order.sliceArea.x = self.order.sliceArea.x + 4
+        self.order.sliceArea.y = self.order.sliceArea.y + 3
         
         if click != 0:
             click %= 4
             self.order.sliceSelect(click)
+
+    def fillTimer (self):
+        click = self.valueList[22]
+
+        self.order.timerArea.x = self.order.timerArea.x + 4
+        self.order.timerArea.y = self.order.timerArea.y + 3
+        
+        if click != 0:
+            click %= 4
+            self.order.timerSelect(click)
 
     def run(self):
         self.fillArea()
         self.fillToppings()
         self.fillMultiplier()
         self.fillSlices()
+        self.fillTimer()
 
         while True:
             for event in pygame.event.get():
