@@ -4,7 +4,7 @@ from constants import Constants
 import sys
 import network
 
-class orderOptions = 
+class orderOptions:
     def __init__(self):
         pygame.init()
 
