@@ -3,6 +3,7 @@ import os
 from constants import Constants
 import sys
 import random
+import time
 
 class npcOrders:
     def __init__(self):
@@ -18,107 +19,149 @@ class npcOrders:
         self.screen.fill((0, 0, 0))
         pygame.display.set_caption("npc order taking")
 
+        self.activeOrders = [] # add data w/ self.activeOrders.append([int index, "name", "sprite", {order data}, int satisfaction score])
+        self.startTimer = None
+        self.duration = 1
+
     def setup(self):
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
         self.bg = pygame.transform.scale(self.bg, (self.WIDTH, self.HEIGHT))
         self.screen.blit(self.bg, (0, 0))
 
-    def orderChoices(self):
-        orders = ['6 artichokes and 4 mushrooms on half pizza. Cut in 6 slices. 30 minutes',
-                  '8 olives on full pizza. Cut in 8 slices. 45 minutes',
-                  '5 spinach and 7 tomatoes on half pizza. Cut in 4 slices. 15 minutes',
-                  '10 pepperoni and 3 onions on full pizza. Cut in 8 slices. 60 minutes',
-                  '7 artichokes, 5 mushrooms, and 4 spinach on full pizza. Cut in 6 slices. 30 minutes',
-                  '9 pineapple and 6 olives on full pizza. Cut in 8 slices. 45 minutes',
-                  '4 tomatoes and 8 spinach on half pizza. Cut in 2 slices. 15 minutes',
-                  '7 olives, 3 pepperoni, and 5 mushrooms on full pizza. Cut in 4 slices. 60 minutes',
-                  '10 onions and 5 artichokes on half pizza. Cut in 6 slices. 30 minutes',
-                  '6 spinach and 9 mushrooms on full pizza. Cut in 8 slices. 45 minutes',
-                  '8 pepperoni and 5 pineapple on half pizza. Cut in 4 slices. 60 minutes',
-                  '7 olives, 2 onions, and 5 tomatoes on full pizza. Cut in 6 slices. 45 minutes',
-                  '9 artichokes on full pizza. Cut in 8 slices. 30 minutes',
-                  '4 pineapple, 5 mushrooms, and 3 spinach each on different quarters of pizza. Cut in 4 slices. 60 minutes',
-                  '6 onions, 7 tomatoes, and 8 olives on full pizza. Cut in 8 slices. 45 minutes',
-                  '5 spinach and 3 artichokes on half pizza. Cut in 2 slices. 15 minutes',
-                  '8 mushrooms and 4 onions on full pizza. Cut in 6 slices. 60 minutes',
-                  '7 tomatoes and 5 pepperoni on half pizza. Cut in 8 slices. 45 minutes',
-                  '6 pineapple, 3 spinach, and 4 artichokes on full pizza. Cut in 4 slices. 30 minutes',
-                  '9 mushrooms and 2 onions on half pizza. Cut in 6 slices. 60 minutes',
-                  '5 artichokes and 6 mushrooms on full pizza. Cut in 8 slices. 45 minutes',
-                  '7 olives and 3 tomatoes on half pizza. Cut in 4 slices. 15 minutes',
-                  '8 pepperoni and 5 onions on full pizza. Cut in 6 slices. 30 minutes',
-                  '4 spinach and 7 pineapple on half pizza. Cut in 2 slices. 60 minutes',
-                  '6 tomatoes, 5 mushrooms, and 4 olives on full pizza. Cut in 8 slices. 45 minutes',
-                  '10 artichokes and 3 spinach on full pizza. Cut in 6 slices. 30 minutes',
-                  '5 pineapple and 7 olives on half pizza. Cut in 4 slices. 15 minutes',
-                  '6 onions and 8 tomatoes on full pizza. Cut in 8 slices. 60 minutes',
-                  '7 mushrooms and 4 pepperoni on half pizza. Cut in 6 slices. 45 minutes',
-                  '9 spinach and 2 artichokes on full pizza. Cut in 4 slices. 30 minutes',
-                  '5 onions and 6 pineapple on full pizza. Cut in 6 slices. 60 minutes',
-                  '8 mushrooms and 3 tomatoes on half pizza. Cut in 4 slices. 15 minutes',
-                  '7 artichokes and 5 pepperoni on full pizza. Cut in 8 slices. 45 minutes',
-                  '4 spinach and 6 olives on half pizza. Cut in 2 slices. 30 minutes',
-                  '9 onions and 5 pineapple on full pizza. Cut in 8 slices. 60 minutes',
-                  '6 tomatoes and 8 artichokes on full pizza. Cut in 6 slices. 45 minutes',
-                  '5 mushrooms and 7 spinach on half pizza. Cut in 4 slices. 15 minutes',
-                  '10 olives and 3 onions on full pizza. Cut in 8 slices. 30 minutes',
-                  '4 artichokes and 8 pineapple on full pizza. Cut in 6 slices. 60 minutes',
-                  '6 pepperoni and 5 mushrooms on half pizza. Cut in 2 slices. 45 minutes',
-                  '7 spinach and 3 tomatoes on full pizza. Cut in 8 slices. 30 minutes',
-                  '5 onions and 8 olives on half pizza. Cut in 4 slices. 60 minutes',
-                  '6 artichokes and 7 pineapple on full pizza. Cut in 8 slices. 45 minutes',
-                  '4 spinach and 5 pepperoni on half pizza. Cut in 6 slices. 30 minutes',
-                  '9 mushrooms and 8 tomatoes on full pizza. Cut in 8 slices. 45 minutes',
-                  '7 olives and 6 onions on half pizza. Cut in 4 slices. 60 minutes',
-                  '5 artichokes and 4 spinach on full pizza. Cut in 8 slices. 15 minutes',
-                  '6 pineapple and 8 pepperoni on half pizza. Cut in 6 slices. 45 minutes',
-                  '7 tomatoes and 5 mushrooms on full pizza. Cut in 4 slices. 30 minutes',
-                  '10 olives and 6 onions on half pizza. Cut in 2 slices. 60 minutes',
-                  '4 spinach and 8 artichokes on full pizza. Cut in 8 slices. 45 minutes',
-                  '5 pineapple and 7 olives on half pizza. Cut in 4 slices. 15 minutes',
-                  '9 mushrooms and 6 tomatoes on full pizza. Cut in 8 slices. 30 minutes',
-                  '7 onions and 4 pepperoni on half pizza. Cut in 6 slices. 60 minutes',
-                  '8 artichokes and 5 spinach on full pizza. Cut in 8 slices. 45 minutes',
-                  '6 olives and 7 pineapple on half pizza. Cut in 2 slices. 15 minutes',
-                  '5 mushrooms and 8 tomatoes on full pizza. Cut in 6 slices. 30 minutes',
-                  '4 onions and 9 pepperoni on half pizza. Cut in 4 slices. 60 minutes',
-                  '7 artichokes and 6 spinach on full pizza. Cut in 8 slices. 45 minutes',
-                  '5 olives and 4 mushrooms on half pizza. Cut in 2 slices. 15 minutes',
-                  '8 pineapple and 7 onions on full pizza. Cut in 6 slices. 30 minutes',
-                  '6 tomatoes and 5 pepperoni on half pizza. Cut in 6 slices. 60 minutes',
-                  '7 mushrooms and 4 spinach on full pizza. Cut in 8 slices. 45 minutes',
-                  '5 artichokes and 6 olives on half pizza. Cut in 4 slices. 30 minutes',
-                  '8 onions and 9 pineapple on full pizza. Cut in 6 slices. 60 minutes',
-                  '7 tomatoes and 5 spinach on half pizza. Cut in 4 slices. 45 minutes',
-                  '6 pepperoni and 4 mushrooms on full pizza. Cut in 8 slices. 15 minutes',
-                  '10 olives and 3 onions on half pizza. Cut in 6 slices. 30 minutes',
-                  '5 artichokes and 6 pineapple on full pizza. Cut in 8 slices. 60 minutes',
-                  '8 mushrooms and 7 spinach on half pizza. Cut in 4 slices. 45 minutes',
-                  '6 olives and 5 tomatoes on full pizza. Cut in 6 slices. 30 minutes',
-                  '7 onions and 4 artichokes on half pizza. Cut in 2 slices. 15 minutes',
-                  '9 pepperoni and 8 pineapple on full pizza. Cut in 8 slices. 60 minutes',
-                  '5 spinach and 6 mushrooms on half pizza. Cut in 6 slices. 45 minutes',
-                  '8 tomatoes and 7 olives on full pizza. Cut in 4 slices. 30 minutes']
+    def orderChoices(self): # these orders were mostly AI generated
+        orders = ['I would like a pizza with 4 slices, bake it for 45 minutes, with artichokes on the top left (2), mushrooms on the right half (1), and olives covering the whole pizza (3).',
+                'Can I get 8 slices and bake it for 30 minutes? I want pepperoni on the whole pizza (2) and spinach on the top right (1).',
+                'I need a pizza with 6 slices, bake it for 60 minutes, and please add pineapple on the bottom left (3), tomato on the right half (1), and olives across the whole pizza (2).',
+                'Could you do 2 slices, 15 minutes in the oven, with artichoke on the left half (1) and mushrooms on the whole pizza (2)?',
+                'I want 4 slices and 45 minutes of baking, with spinach on the top left (2), tomato on the bottom right (3), and olives everywhere (1).',
+                'Give me a pizza with 8 slices, 60 minutes baking time, pepperoni on the right half (2), bell peppers on the whole pizza (1), and mushrooms on the bottom left (3).',
+                'I will take 6 slices, bake it for 30 minutes, with pineapple on the top right (2), tomato on the bottom right (1), spinach over the whole pizza (4), and olives on the top left (2).',
+                'Just 2 slices, bake it for 15 minutes, olives all over (1), and artichoke on the left half (2).',
+                'Can you make it 8 slices, bake for 60 minutes? Put pepperoni on the bottom left (3) and mushrooms on the top left (2).',
+                'For me, 4 slices, 45 minutes in the oven, with pineapple all over (2), tomato on the right half (3), and spinach on the top right (1).',
+                'I want 6 slices, bake it for 30 minutes, and please add mushrooms on the bottom right (2), artichokes on the left half (1), olives on the top left (4), and spinach all over (3).',
+                'I would like 8 slices, bake it for 15 minutes, with pepperoni on the whole pizza (3) and olives on the top right (1).',
+                'Make it 4 slices, bake for 45 minutes, with spinach on the bottom left (1) and mushrooms on the right half (2).',
+                'For me, 2 slices, bake it for 60 minutes, and add tomato everywhere (2) and pineapple on the top right (1).',
+                'Give me 6 slices, 15 minutes baking time, artichoke on the bottom left (2), spinach all over (1), and tomato on the right half (3).',
+                'I want 8 slices, bake it for 30 minutes, with pepperoni on the whole pizza (4), mushrooms on the top left (2), and olives on the bottom right (3).',
+                'I will have 2 slices, bake it for 45 minutes, with pineapple on the left half (2) and mushrooms covering the whole pizza (1).',
+                'I would like 6 slices, 60 minutes in the oven, spinach on the top right (3), tomato on the bottom left (2), and olives all over (1).',
+                'I need 8 slices, bake for 15 minutes, with mushrooms on the right half (2), artichokes on the top left (1), and olives on the whole pizza (4).',
+                'For me, 4 slices, bake for 30 minutes, with pineapple on the bottom right (1), tomato all over (2), and spinach on the right half (3).',
+                'Give me 6 slices, bake for 60 minutes, spinach on the left half (3), artichokes on the bottom left (2), and olives all over (1).',
+                'I would like 8 slices, bake for 45 minutes, with pepperoni on the top right (2), bell peppers all over (1), mushrooms on the bottom right (3), and spinach on the left half (4).',
+                'Can you make it 2 slices, bake for 30 minutes? Add pineapple on the right half (2) and tomato on the bottom left (1).',
+                'I would like 4 slices, bake for 15 minutes, olives on the top left (3) and artichoke all over (2).',
+                'I need 6 slices, bake for 60 minutes, with pepperoni on the top left (2), mushrooms on the bottom right (1), and spinach all over (4).',
+                'I will take 8 slices, bake it for 45 minutes, with artichokes on the bottom left (2), tomato on the top left (1), and olives on the whole pizza (3).',
+                'Give me 4 slices, bake it for 30 minutes, with pineapple on the whole pizza (2) and spinach on the top right (1).',
+                'I would like 6 slices, bake for 15 minutes, artichoke on the bottom left (3), mushrooms on the right half (1), and olives everywhere (2).',
+                'Can I get 2 slices, bake it for 60 minutes? Put pepperoni on the left half (2) and pineapple on the whole pizza (1).',
+                'I want 8 slices, bake it for 30 minutes, with tomato on the top left (2), spinach all over (3), and olives on the bottom right (1).',
+                'Give me 4 slices, bake for 45 minutes, artichokes on the top left (2), mushrooms on the right half (1), and olives on the whole pizza (3).',
+                'I need 6 slices, bake for 60 minutes, pepperoni on the bottom left (3), pineapple on the right half (1), and spinach all over (2).',
+                'I would like 2 slices, bake it for 15 minutes, artichokes on the left half (1) and tomato all over (2).',
+                'Can you make it 8 slices, bake it for 30 minutes? Pineapple on the bottom right (2), spinach on the top left (1), and olives on the whole pizza (3).',
+                'Give me 4 slices, bake for 45 minutes, mushrooms on the right half (2), tomato on the bottom left (1), and olives on the whole pizza (3).',
+                'I want 6 slices, bake for 60 minutes, artichoke on the top right (3), mushrooms on the bottom left (2), and spinach all over (1).',
+                'I will take 2 slices, bake it for 15 minutes, pineapple on the right half (2) and tomato on the whole pizza (1).',
+                'I need 8 slices, bake for 30 minutes, olives on the top left (3) and artichoke on the whole pizza (2).',
+                'For me, 4 slices, bake for 45 minutes, pepperoni on the bottom right (2) and pineapple all over (1).',
+                'I would like 6 slices, bake for 60 minutes, mushrooms on the top left (2), spinach on the right half (1), and olives everywhere (4).',
+                'Can you make it 8 slices, bake it for 15 minutes? Tomato on the bottom left (2), artichoke on the top right (1), and spinach all over (3).',
+                'I want 4 slices, bake for 30 minutes, pineapple all over (2) and spinach on the right half (1).',
+                'Give me 6 slices, bake for 45 minutes, mushrooms on the top right (2), olives on the bottom left (3), and pepperoni everywhere (1).',
+                'I need 2 slices, bake it for 60 minutes, spinach on the left half (2) and tomato all over (1).',
+                'I would like 8 slices, bake for 30 minutes, artichoke on the top left (3) and olives on the whole pizza (2).',
+                'For me, 4 slices, bake for 15 minutes, pineapple on the bottom right (2) and mushrooms on the whole pizza (1).',
+                'I want 6 slices, bake it for 60 minutes, artichokes on the top right (2), tomatoes on the bottom left (1), and olives all over (3).',
+                'Can I get 8 slices, bake for 45 minutes, spinach on the top left (3) and pepperoni all over (2).',
+                'I would like 2 slices, bake it for 15 minutes, with mushrooms on the right half (2) and artichoke on the whole pizza (1).',
+                'I need 4 slices, bake for 30 minutes, with pineapple on the bottom left (1) and spinach all over (2).',
+]
     
-        randOrder = random.randint(0, 74)
+        randOrder = random.randint(0, 49)
         order = orders[randOrder]
-        print(order)
+        self.charDisplay(order)
 
          # add random order, character (if time LATER, add multiple players w an array to keep track of who had what order)
 
-    def textDisplay(self):
-        quit # print selected order
+    def miniTimer(self):
+        if self.startTimer is None:
+            return
+        
+        self.passed = time.time() - self.startTimer
+        self.left = self.duration - self.passed
+        
+        if self.left < 0:
+            pygame.draw.rect(self.screen, (212, 238,241), pygame.Rect(0, 0, 1000, 300))
+            return
 
-    def charDisplay(self):
-        quit # print sprite sliding upon call
+        font = pygame.font.SysFont("comicsans", int(30))
+        timerPrint = font.render(str(int(self.left)) + "  ", True, (0,0,0), (212,238,241))
+        self.screen.blit(timerPrint, (960, 30))
+
+    def textDisplay(self, text):
+        font = pygame.font.SysFont("comicsans", int(30))
+        textBreaks = self.breakLines(text, font)
+        x = 80
+        y = 80
+
+        for l in textBreaks:
+            c = font.render(l, True, (255, 255, 255), (0, 0 , 0))
+            self.screen.blit(c, (x, y))
+            y += 60
+
+        self.startTimer = time.time()
+
+    def breakLines(self, text, font):
+        chars = len(text)
+        lines = []
+        lineText = ""
+        i = 0
+        word = ""
+        
+        while i < chars:
+            if text[i] == " ":
+                textWidth, _ = font.size(lineText)
+                wordWidth, _ = font.size(word)
+
+                if (textWidth + wordWidth) > 900:
+                    lines.append(lineText)
+                    lineText = word + " "
+                    word = ""
+
+                else:
+                    word += " "
+                    lineText += word
+                    word = ""
+
+            else:
+                word += text[i]
+
+            if i == chars - 1:
+                lineText += word
+
+            i += 1
+
+        lines.append(lineText)
+        return lines
+
+    def charDisplay(self, text):
+        # print sprite sliding upon call
+        self.textDisplay(text)
+        # print sprite leaving screen
 
     def accuracyCalc(self):
         quit # compare request to order ticket
 
+    def customerInfo(self):
+        return # customer name, sprite, order array
+
     # random order, order options, text display, character display, add to array for tables, requested order score
 
     def run(self):
-        self.setup()
         self.orderChoices()
 
         while True:
@@ -134,12 +177,17 @@ class npcOrders:
                         pygame.quit()
                         sys.exit()
 
+            self.miniTimer()
+
                 # add something for resizing the screen
                         
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.SMTH.collidepoint(pygame.mouse.get_pos()):
-                        quit
+                # elif event.type == pygame.MOUSEBUTTONDOWN:
+                #     if self.SMTH.collidepoint(pygame.mouse.get_pos()):
+                #         quit
+
+            pygame.display.flip()
 
 if __name__ == "__main__":
     n = npcOrders()
+    n.setup()
     n.run()
