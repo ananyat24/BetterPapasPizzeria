@@ -22,19 +22,7 @@ class npcOrders:
 
         self.activeOrders = [] # add data w/ self.activeOrders.append([int index, "name", "sprite", {order data}, int satisfaction score])
         self.startTimer = None
-        self.duration = 1
-    def customer_yapping(self, username: str, sprite_sheet:str, start_x, start_y, order):
-        self.curr_customer = Player(username, sprite_sheet, start_x, start_y)
-        self.curr_customer.order = npcOrders.orderChoices()
-        image =  pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
-        while self.curr_customer.player_rectangle.topleft.x <= 450:
-            self.curr_customer.player_rectangle.topleft.x -= 5
-            
-
-
-        self.activeOrders = [] # add data w/ self.activeOrders.append([int index, "name", "sprite", {order data}, int satisfaction score])
-        self.startTimer = None
-        self.duration = 1
+        self.duration = 10
 
     def customer_yapping(self, username: str, sprite_sheet:str, start_x, start_y, order):
         self.curr_customer = Player(username, sprite_sheet, start_x, start_y)
@@ -42,8 +30,6 @@ class npcOrders:
         image =  pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
         while self.curr_customer.player_rectangle.topleft.x <= 450:
             self.curr_customer.player_rectangle.topleft.x -= 5
-            
-
 
     def setup(self):
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
@@ -119,7 +105,7 @@ class npcOrders:
         self.left = self.duration - self.passed
         
         if self.left < 0:
-            pygame.draw.rect(self.screen, (212, 238,241), pygame.Rect(0, 0, 1000, 300))
+            pygame.draw.rect(self.screen, (212, 238,241), pygame.Rect(0, 0, 1030, 300))
             return
 
         font = pygame.font.SysFont("comicsans", int(30))
@@ -175,6 +161,7 @@ class npcOrders:
     def charDisplay(self, text):
         # print sprite sliding upon call
         self.textDisplay(text)
+        pygame.time.wait(15)
         # print sprite leaving screen
 
     def accuracyCalc(self):
