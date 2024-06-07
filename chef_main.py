@@ -2,6 +2,7 @@ import pygame
 from chef_files.slicing_pizza import SlicingPizza
 from chef_files.adding_toppings import AddingToppings
 from constants import Constants
+from chefOrderTicket import orderTicketFill
 
 class Chef(): 
     # create the screen
@@ -32,8 +33,16 @@ class Chef():
         self.chef_adding_toppings.pizza_fly_in()
 
 
-    def run(self):   
+    def run(self, n, data):   
         self.setup()
+        data = {"stage": "in_level", "role": "chef", "to_send_to_chef": None, "to_send_to_waiter": None}
+        data = n.send(data)
+        print(data) # for testing can remove
+
+        most_recent_ticket = data["to_send_to_chef"]
+        # if(most_recent_ticket):
+            #there is a ticket then do stuff with it here and uncomment this line
+
         # gameloop
         x_org, y_org = None, None
         while self.gameloop:

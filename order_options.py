@@ -176,28 +176,28 @@ class orderOptions:
         self.update()
 
     def ingredientArea(self, x, y, click, color):
-        self.artichoke = pygame.image.load(os.path.join("pictures\single_ingredients", "artichoke.png"))
+        self.artichoke = pygame.image.load(os.path.join("pictures", "single_ingredients", "artichoke.png"))
         self.artichoke = pygame.transform.scale(self.artichoke, (50, 50))
 
-        self.mushroom = pygame.image.load(os.path.join("pictures\single_ingredients", "mushroom.png"))
+        self.mushroom = pygame.image.load(os.path.join("pictures", "single_ingredients", "mushroom.png"))
         self.mushroom = pygame.transform.scale(self.mushroom, (50, 50))
 
-        self.olive = pygame.image.load(os.path.join("pictures\single_ingredients", "olive.png"))
+        self.olive = pygame.image.load(os.path.join("pictures", "single_ingredients", "olive.png"))
         self.olive = pygame.transform.scale(self.olive, (50, 50))
 
-        self.onions = pygame.image.load(os.path.join("pictures\single_ingredients", "onions.png"))
+        self.onions = pygame.image.load(os.path.join("pictures", "single_ingredients", "onions.png"))
         self.onions = pygame.transform.scale(self.onions, (50, 50))
 
-        self.pepperoni = pygame.image.load(os.path.join("pictures\single_ingredients", "pepperoni.png"))
+        self.pepperoni = pygame.image.load(os.path.join("pictures", "single_ingredients", "pepperoni.png"))
         self.pepperoni = pygame.transform.scale(self.pepperoni, (50, 50))
 
-        self.pineapple = pygame.image.load(os.path.join("pictures\single_ingredients", "pineapple.png"))
+        self.pineapple = pygame.image.load(os.path.join("pictures", "single_ingredients", "pineapple.png"))
         self.pineapple = pygame.transform.scale(self.pineapple, (50, 50))
 
-        self.spinach = pygame.image.load(os.path.join("pictures\single_ingredients", "spinach.png"))
+        self.spinach = pygame.image.load(os.path.join("pictures", "single_ingredients", "spinach.png"))
         self.spinach = pygame.transform.scale(self.spinach, (50, 50))
 
-        self.tomato = pygame.image.load(os.path.join("pictures\single_ingredients", "tomato.png"))
+        self.tomato = pygame.image.load(os.path.join("pictures", "single_ingredients", "tomato.png"))
         self.tomato = pygame.transform.scale(self.tomato, (50, 50))
 
         if color == 1: # pink
@@ -337,14 +337,9 @@ class orderOptions:
         c = Constants()
         c.ticketLoad
         c.ticketSave
-        data = c.VALUES_JSON
+        return c.VALUES_JSON
 
-        # aarna fix this please
-        n = network.Network()
-        n.connect()
-        n.send(data)
-            
-    def run(self):
+    def run(self, n, data):
         self.setup()
 
         while True:
@@ -456,7 +451,11 @@ class orderOptions:
                         self.timerSelect(self.timerCount % 4)
 
                     elif self.completeButton.collidepoint(pygame.mouse.get_pos()):
-                        self.onComplete() # send ticket to chef
+                        json_to_send = self.onComplete() # send ticket to chef
+                        data = {"stage": "in_level", "role": "waiter", "to_send_to_chef" : {"receipt": json_to_send, "receipt score" : None}, "to_send_to_waiter": None}
+                        # print(data)
+                        data = n.send(data)
+
 
                         self.TA1count = 0
                         self.TA2count = 0
