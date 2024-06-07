@@ -14,7 +14,8 @@ class Player:
         self.spritesheet=pygame.transform.scale(self.spritesheet, (409, 183))
         self.spritesheet_frames = [self.spritesheet.subsurface((i * (self.spritesheet.get_width() // 4), 0, self.spritesheet.get_width() // 4, self.spritesheet.get_height())) for i in range(4)]
         self.player_rectangle=self.spritesheet_frames[self.current_frame].get_rect()
-        self.player_rectangle.topleft = (start_x, start_y)
+        self.player_rectangle.topleft.x = start_x
+        self.player_rectangle.topleft.y = start_y
         self.flipped = False
         #frame of spritesheet player is currently using
         self.current_frame = 0
@@ -22,10 +23,12 @@ class Player:
         self.framegap = 10
         self.action = ""
         self.curr_sheet = None
+        self.order = None
    
    #joythumbsup
 
-    def npc_action(self, framecounter, firstchange): 
+    def npc_action(self, action:str): 
+        self.action = action
         if self.action == "allan_angry":
             self.spritesheet = pygame.image.load(os.path.join("Images", "allanspritesheet_angry.png"))
             self.spritesheet=pygame.transform.scale(self.spritesheet, (1105, 206))
@@ -86,7 +89,7 @@ class Player:
         if self.action == "bertha_walking":
             self.spritesheet = pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
             self.spritesheet=pygame.transform.scale(self.spritesheet, (118, 212))
-
+            self.current_sheet = self.spritesheet
 
 
 
