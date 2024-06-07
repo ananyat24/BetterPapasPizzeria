@@ -4,6 +4,7 @@ from constants import Constants
 import sys
 import random
 import time
+import Player
 
 class npcOrders:
     def __init__(self):
@@ -22,6 +23,27 @@ class npcOrders:
         self.activeOrders = [] # add data w/ self.activeOrders.append([int index, "name", "sprite", {order data}, int satisfaction score])
         self.startTimer = None
         self.duration = 1
+    def customer_yapping(self, username: str, sprite_sheet:str, start_x, start_y, order):
+        self.curr_customer = Player(username, sprite_sheet, start_x, start_y)
+        self.curr_customer.order = npcOrders.orderChoices()
+        image =  pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
+        while self.curr_customer.player_rectangle.topleft.x <= 450:
+            self.curr_customer.player_rectangle.topleft.x -= 5
+            
+
+
+        self.activeOrders = [] # add data w/ self.activeOrders.append([int index, "name", "sprite", {order data}, int satisfaction score])
+        self.startTimer = None
+        self.duration = 1
+
+    def customer_yapping(self, username: str, sprite_sheet:str, start_x, start_y, order):
+        self.curr_customer = Player(username, sprite_sheet, start_x, start_y)
+        self.curr_customer.order = npcOrders.orderChoices()
+        image =  pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
+        while self.curr_customer.player_rectangle.topleft.x <= 450:
+            self.curr_customer.player_rectangle.topleft.x -= 5
+            
+
 
     def setup(self):
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
@@ -84,6 +106,8 @@ class npcOrders:
         randOrder = random.randint(0, 49)
         order = orders[randOrder]
         self.charDisplay(order)
+        print(order)
+        return order
 
          # add random order, character (if time LATER, add multiple players w an array to keep track of who had what order)
 
