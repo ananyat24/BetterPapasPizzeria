@@ -40,7 +40,7 @@ my_font = pygame.font.SysFont('Comic Sans MS', 30)
 n = Network()
 n.connect()
 
-data = {"stage":"intro", "key": None, "role": None, "remaining_roles": ["waiter", "chef"]}
+data = {"stage":"intro", "key": None, "role": None, "remaining_roles": ["waiter", "chef"], "to_send_to_chef": None, "to_send_to_waiter": None}
 cur_screen = "unselected"
 
 # gameloop
@@ -53,31 +53,11 @@ while gameloop:
 
         if data["stage"] == "intro":
             screen.blit(homescreen_image, (0,0))
-            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(intro_begin_btn), 10)
-            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(intro_settings_btn), 10)
-            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(intro_tutorial_btn), 10)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if intro_begin_btn.collidepoint(pygame.mouse.get_pos()):
                     data["stage"] = "selection"
             pygame.display.update()
 
-        # height = 50
-        # # if data["role"] == None:
-        # for role in data["remaining_roles"]:  
-        #     #print(role)  
-        #     txtsurf = my_font.render(role, True, (255, 255, 255))
-        #     screen.blit(txtsurf,(30, height))
-        #     height += 100
-
-        # elif data["role"] == "chef":
-        #     txtsurf = my_font.render("waiter", True, (255, 255, 255))
-        #     screen.blit(txtsurf,(30, 50))
-        #     height += 100
-
-        # elif data["role"] == "waiter":
-        #     txtsurf = my_font.render("chef", True, (255, 255, 255))
-        #     screen.blit(txtsurf,(30, 150))
-        #     height += 100
 
         elif data["stage"] == "selection":
             
@@ -91,10 +71,6 @@ while gameloop:
             else:
                     screen.blit(role_selection_ch, (0,0))
                 
-            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(selection_chef_btn), 10)
-            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(selection_waiter_btn), 10)
-            # pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(selection_continue_btn), 10)
-
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if selection_chef_btn.collidepoint(pygame.mouse.get_pos()):
                     cur_screen = "chef_selected"
@@ -115,54 +91,15 @@ while gameloop:
                     print(data["stage"])
 
             pygame.display.update()
-            # if event.type == pygame.KEYDOWN:
-            #     if event.key == pygame.K_LEFT:
-            #         if data["key"] != "left":
-            #             data["remaining_roles"] = ["waiter", "chef"]
-            #             data["key"] = "left"
-            #             # print(data)
-            #             data = n.send(data)
-            #             # print("#2: ")
-            #             #print(data)
-            #         if data["key"] != "left":
-            #             data["remaining_roles"] = ["waiter", "chef"]
-            #             data["key"] = "left"
-            #             # print(data)
-            #             data = n.send(data)
-            #             # print("#2: ")
-            #             #print(data)
-            #     if event.key == pygame.K_RIGHT:
-            #         if data["key"] != "right":
-            #             data["remaining_roles"] = ["waiter", "chef"]
-            #             data["key"] = "right"
-            #             data = n.send(data)
-            #     if event.key == pygame.K_UP:
-            #         data["key"] = "up"
-            #         if data["key"] != "right":
-            #             data["remaining_roles"] = ["waiter", "chef"]
-            #             data["key"] = "right"
-            #             data = n.send(data)
-            #     if event.key == pygame.K_UP:
-            #         data["key"] = "up"
-            #         data = n.send(data)
-            
-
 
         elif data["stage"] == "waiter1":
-                waiter.run()
+                waiter.run(n, data)
 
         elif data["stage"] == "chef1":
-                chef.run()
+                chef.run(n, data)
         else:
             screen.blit(homescreen_image, (0, 0))
             pygame.display.update()
-    # n.send("hi")
-
-    # print(n.get_role())
-
-    # text_surface = my_font.render(n.get_role(), False, (0, 0, 0))
-    # screen.blit(text_surface, (0,0))
-
 
 
 pygame.quit()
