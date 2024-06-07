@@ -42,9 +42,11 @@ class waiterRun:
 
                 # add something for resizing the screen
                         
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.SMTH.collidepoint(pygame.mouse.get_pos()):
-                        quit
+                # elif event.type == pygame.MOUSEBUTTONDOWN:
+                #     if self.SMTH.collidepoint(pygame.mouse.get_pos()):
+                #         quit
+
+                pygame.display.flip()
 
 if __name__ == "__main__":
     w = waiterRun()
