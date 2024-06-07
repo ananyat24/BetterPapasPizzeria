@@ -73,15 +73,23 @@ while gameloop:
                 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if selection_chef_btn.collidepoint(pygame.mouse.get_pos()):
-                    cur_screen = "chef_selected"
+                    
                     data["key"] = "right"
                     data = n.send(data)
+                    if data["role"] == "chef":
+                         cur_screen = "chef_selected"
+
+                    print(data)
                 
 
                 if selection_waiter_btn.collidepoint(pygame.mouse.get_pos()):
-                    cur_screen = "waiter_selected"
                     data["key"] = "left"
                     data = n.send(data)
+                    if data["role"] == "waiter":
+                         cur_screen = "waiter_selected"
+                    
+
+                    print(data)
                     
                 if selection_continue_btn.collidepoint(pygame.mouse.get_pos()):
                     data["key"] = "continue"

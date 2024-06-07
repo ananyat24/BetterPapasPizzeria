@@ -20,6 +20,7 @@ server_socket.listen()
 print("Waiting for a connection, Server Started")
 
 role = ["chef", "waiter"]
+selected_roles = []
 stored_data = {"to_send_to_chef": None, "to_send_to_waiter": None}
 
 def threaded_client(conn, player):
@@ -27,6 +28,7 @@ def threaded_client(conn, player):
     reply = " "
     while True:
         print("server has been accessed")
+        
         try:
             data = json.loads(conn.recv(2048).decode(ENCODER))
 
@@ -38,20 +40,30 @@ def threaded_client(conn, player):
 
             else:
                 print("checking stages")
+
+                # if not len(data["remaining_roles"]) == len(role):
+                #     data["remaining_roles"] = role
                 
                 if data["stage"] == "selection":
 
                     if data["key"] == "left":
-                        data["role"] = "waiter"
-                        if "waiter" in data["remaining_roles"]:
-                            data["remaining_roles"].remove("waiter")
+                        
+                        if "waiter" in role:
+                            # data["remaining_roles"].remove("waiter")
+                            role.remove("waiter")
+                            data["role"] = "waiter"
+                            print("it let me pick waiter")
+                        
                         # data["key"] = None
                     
                     if data["key"] == "right":
-                        data["role"] = "chef"
+                        
                         # print('MAKING ROLE CHEF')
-                        if "chef" in data["remaining_roles"]:
-                            data["remaining_roles"].remove("chef")
+                        if "chef" in role:
+                            # data["remaining_roles"].remove("chef")
+                            role.remove("chef")
+                            data["role"] = "chef"
+                            
                         # data["key"] = None
 
                     if data["key"] == "continue":
@@ -60,10 +72,16 @@ def threaded_client(conn, player):
                             data["stage"] = "waiter1"
                             data["key"] = None
 
+
                         if data["role"] == "chef":
                             data["stage"] = "chef1"
                             data["key"] = None
                            #  print("chef stage beginning")
+                    
+                    data["remaining_role"] = role
+                    
+                    print(role)
+                    print(data)
 
                     reply = json.dumps(data)
                 
@@ -79,7 +97,7 @@ def threaded_client(conn, player):
                     data = {"stage": "in_level", "to_send_to_chef": stored_data["to_send_to_chef"], "to_send_to_waiter": stored_data["to_send_to_waiter"]}
                     reply = json.dumps(data)
 
-                    print(data)
+                    # print(data)
 
                     conn.sendall(reply.encode(ENCODER))
 
