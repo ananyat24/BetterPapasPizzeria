@@ -80,11 +80,11 @@ def run():
     screen = pygame.display.set_mode((c.screen_width, c.screen_height))
     clock = pygame.time.Clock()
 
-    font = pygame.font.SysFont("Liberation Sans", 30)
-    message = TextScroll(pygame.Rect(50, 50, c.screen_width - 100, c.screen_height - 100), font, YELLOW, BLACK, INTRO, ms_per_line=1000)
+    font = pygame.font.SysFont("Comic Sans MS", 30)
+    message = TextScroll(pygame.Rect(50, 50, c.screen_width - 100, c.screen_height - 100), font, YELLOW, BLACK, INTRO, ms_per_line=1500)
 
-    loop = True
-    while loop:
+    time_passed = time.time()
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 loop = False
@@ -96,9 +96,10 @@ def run():
             message.draw(screen)
             pygame.display.flip()
             clock.tick(60)
+    
+    # button = pygame.image.load(os.path.join("pictures", "instructions_continue.png"))
+    # screen.blit(button, (c.screen_width- 70, c.screen_height - 70))
 
-# if __name__ == "__main__":
-#     run()
 
 
 

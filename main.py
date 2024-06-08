@@ -23,6 +23,8 @@ chef = Chef()
 intro_begin_btn = pygame.Rect(475, 425, 410, 80)
 intro_settings_btn = pygame.Rect(475, 550, 410, 80)
 intro_tutorial_btn = pygame.Rect(475, 670, 410, 80)
+intro_instructions_btn = pygame.Rect(475, 255, 200, 200)
+instr_continue_btn = pygame.Rect(695, 1280, 300, 300)
 
 selection_chef_btn = pygame.Rect(1010, 650, 260, 100)
 selection_waiter_btn = pygame.Rect(105, 650, 260, 100)
@@ -51,15 +53,21 @@ while gameloop:
         if event.type == pygame.QUIT:
             gameloop = False
 
-        if data["stage"] == "instructions":
-            run() # intro
-            if event.type == pygame.KEYDOWN:
-                data["stage"] = "intro"
-            pygame.display.update()
+        # if data["stage"] == "instructions":
+        #     if event.type == pygame.MOUSEBUTTONDOWN:
+        #         if instr_continue_btn.collidepoint(pygame.mouse.get_pos()):
+        #             data["stage"] = "intro"
+        #     pygame.display.update()
 
         if data["stage"] == "intro":
             
             screen.blit(homescreen_image, (0,0))
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if intro_instructions_btn.collidepoint(pygame.mouse.get_pos()):
+                    data["stage"] = "instructions"
+                    run()
+            pygame.display.update()
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if intro_begin_btn.collidepoint(pygame.mouse.get_pos()):
                     data["stage"] = "selection"
