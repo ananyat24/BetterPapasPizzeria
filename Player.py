@@ -10,15 +10,30 @@ class Player:
 
 
     def __init__(self, username: str, sprite_sheet:str, start_x, start_y):
-        self.spritesheet = pygame.image.load(os.path.join("Images", "joyspritesheet1.png"))
-        self.spritesheet=pygame.transform.scale(self.spritesheet, (409, 183))
-        self.spritesheet_frames = [self.spritesheet.subsurface((i * (self.spritesheet.get_width() // 4), 0, self.spritesheet.get_width() // 4, self.spritesheet.get_height())) for i in range(4)]
+        self.username = username
+        self.spritesheet = pygame.image.load(os.path.join("Images", sprite_sheet))
+        w, _ = self.spritesheet.get_size()
+
+        if self.spritesheet is None:
+            print("1")
+            pygame.quit()
+            sys.exit()
+
+        elif w % 4 != 0:
+            print("2")
+            # pygame.quit()
+            # sys.exit()
+            self.spritesheet=pygame.transform.scale(self.spritesheet, (409, 183))
+            # self.spritesheet_frames = [self.spritesheet.subsurface((i * (self.spritesheet.get_width() // 4), 0, self.spritesheet.get_width() // 4, self.spritesheet.get_height())) for i in range(4)]
+            self.spritesheet_frames = [self.spritesheet.subsurface((i * (self.spritesheet.get_width() // 4), 0, self.spritesheet.get_width() // 4 if i != 3 else (self.spritesheet.get_width() // 4) + (self.spritesheet.get_width() % 4), self.spritesheet.get_height())) for i in range(4)]
+
+        self.current_frame = 0
         self.player_rectangle=self.spritesheet_frames[self.current_frame].get_rect()
-        self.player_rectangle.topleft.x = start_x
-        self.player_rectangle.topleft.y = start_y
+        # self.player_rectangle.topleft = (start_x, start_y)
+
         self.flipped = False
         #frame of spritesheet player is currently using
-        self.current_frame = 0
+        
         self.direction = None
         self.framegap = 10
         self.action = ""
@@ -27,7 +42,7 @@ class Player:
    
    #joythumbsup
 
-    def npc_action(self, action:str): 
+    def npc_action(self, action:str):
         self.action = action
         if self.action == "allan_angry":
             self.spritesheet = pygame.image.load(os.path.join("Images", "allanspritesheet_angry.png"))

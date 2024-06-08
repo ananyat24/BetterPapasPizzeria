@@ -4,7 +4,7 @@ from constants import Constants
 import sys
 import random
 import time
-import Player
+# import Player
 
 class npcOrders:
     def __init__(self):
@@ -24,12 +24,19 @@ class npcOrders:
         self.startTimer = None
         self.duration = 10
 
-    def customer_yapping(self, username: str, sprite_sheet:str, start_x, start_y, order):
-        self.curr_customer = Player(username, sprite_sheet, start_x, start_y)
-        self.curr_customer.order = npcOrders.orderChoices()
-        image =  pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
-        while self.curr_customer.player_rectangle.topleft.x <= 450:
-            self.curr_customer.player_rectangle.topleft.x -= 5
+        self.currentSprite = ""
+        self.image = None
+
+    # def customer_yapping(self, username: str, sprite_sheet:str, start_x, start_y):
+    #     self.curr_customer = Player.Player(username, sprite_sheet, start_x, start_y)
+    #     self.curr_customer.order = self.orderChoices()
+    #     image =  pygame.image.load(os.path.join("Images", "berthaspritesheet_standing.png"))
+    #     while self.curr_customer.player_rectangle.topleft[0] <= 450:
+    #         self.curr_customer.updatePosition(5, 0)
+    #         self.setup()
+    #         self.curr_customer.moveChar(self.screen)
+    #         pygame.display.flip()
+    #         pygame.time.delay(50)
 
     def setup(self):
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
@@ -94,7 +101,6 @@ class npcOrders:
         self.charDisplay(order)
         print(order)
         return order
-
          # add random order, character (if time LATER, add multiple players w an array to keep track of who had what order)
 
     def miniTimer(self):
@@ -159,10 +165,38 @@ class npcOrders:
         return lines
 
     def charDisplay(self, text):
-        # print sprite sliding upon call
+        self.spriteSelect()
+        self.spriteArrival()
+
         self.textDisplay(text)
         pygame.time.wait(15)
+
         # print sprite leaving screen
+
+    def spriteSelect(self):
+        sprites = ["allanspritesheet_thumbs up.png", "allanspritesheet_angry.png", "berthaspritesheet_happy.png", "berthaspritesheet_angry.png", "joyspritesheet2.png"]
+        r = random.randint(0,3)
+        self.currentSprite = sprites[r]
+        self.image = pygame.image.load(os.path.join("Images", self.currentSprite))
+
+        n = 5
+        if self.currentSprite == "joyspritesheet2.png":
+            n = 7
+        elif self.currentSprite == "berthaspritesheet_angry.png":
+            n = 6
+
+        w = (self.image.get_width())/n
+
+        self.image = self.image.subsurface((w*3, 0, w, self.image.get_height())).copy()
+        self.image = pygame.transform.scale(self.image, (1.3*self.image.get_width(), 1.3*self.image.get_height()))
+
+    def spriteArrival(self):
+        x = 450
+        y = 265
+        self.screen.blit(self.image, (x, y))
+
+    # def spriteExit(self): # implement if time
+    #     quit
 
     def accuracyCalc(self):
         quit # compare request to order ticket
@@ -176,8 +210,6 @@ class npcOrders:
         self.orderChoices()
 
         while True:
-            reload = False
-
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
