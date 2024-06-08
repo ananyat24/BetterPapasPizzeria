@@ -4,7 +4,7 @@ from network import Network
 from order_options import orderOptions
 from chef_main import Chef
 import os
-
+from intro import run
 
 # create the screen
 pygame.init()
@@ -51,7 +51,14 @@ while gameloop:
         if event.type == pygame.QUIT:
             gameloop = False
 
+        if data["stage"] == "instructions":
+            run() # intro
+            if event.type == pygame.KEYDOWN:
+                data["stage"] = "intro"
+            pygame.display.update()
+
         if data["stage"] == "intro":
+            
             screen.blit(homescreen_image, (0,0))
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if intro_begin_btn.collidepoint(pygame.mouse.get_pos()):

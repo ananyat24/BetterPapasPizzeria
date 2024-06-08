@@ -3,6 +3,7 @@ import os
 from constants import Constants
 import sys
 import network
+import npcOrders
 
 class orderOptions:
     def __init__(self):
