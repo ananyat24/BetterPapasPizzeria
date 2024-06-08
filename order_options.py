@@ -4,6 +4,7 @@ from constants import Constants
 import sys
 import network
 import npcOrders
+import time
 
 class orderOptions:
     def __init__(self):
@@ -76,6 +77,9 @@ class orderOptions:
         self.sliceArea = pygame.Rect(1230, 525, 85, 83)
         self.completeButton = pygame.Rect(1050, 610, 280, 55)
         self.timerArea = pygame.Rect(1075, 525, 82, 73)
+
+        self.startTimer = None
+        self.duration = 15
 
         # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.completeButton), 10)
 
@@ -320,12 +324,32 @@ class orderOptions:
         c.ticketLoad
         c.ticketSave
         return c.VALUES_JSON
+            
+    def miniTimer(self):
+        if self.startTimer is None:
+            return
+        
+        self.passed = time.time() - self.startTimer
+        self.left = self.duration - self.passed
+        
+        if self.left < 0:
+            pygame.draw.rect(self.screen, (212, 238,241), pygame.Rect(0, 0, 1030, 300))
+            return
+
+        font = pygame.font.SysFont("comicsans", int(30))
+        timerPrint = font.render(str(int(self.left)) + "  ", True, (0,0,0), (212,238,241))
+        self.screen.blit(timerPrint, (960, 30))
 
     def run(self, n, data):
+        n = npcOrders.npcOrders()
+
         self.setup()
+        n.orderChoices()
+        self.startTimer = time.time()
 
         while True:
             reload = False
+            self.miniTimer()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -336,8 +360,6 @@ class orderOptions:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         sys.exit()
-
-                # add something for resizing the screen
                         
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if self.toppingArea1.collidepoint(pygame.mouse.get_pos()):
@@ -438,6 +460,10 @@ class orderOptions:
                         # print(data)
                         data = n.send(data)
 
+                        o = npcOrders.npcOrders()
+                        self.setup()
+                        o.orderChoices()
+                        self.startTimer = time.time()
 
                         self.TA1count = 0
                         self.TA2count = 0
@@ -467,7 +493,6 @@ class orderOptions:
                         self.timerCount = 0
 
                         self.update()
-                        self.setup()
                 
             pygame.display.flip()
 

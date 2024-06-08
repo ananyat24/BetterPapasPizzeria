@@ -17,12 +17,10 @@ class npcOrders:
 
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
         
-        self.screen.fill((0, 0, 0))
-        pygame.display.set_caption("npc order taking")
+        # self.screen.fill((0, 0, 0))
+        # pygame.display.set_caption("npc order taking")
 
         self.activeOrders = [] # add data w/ self.activeOrders.append([int index, "name", "sprite", {order data}, int satisfaction score])
-        self.startTimer = None
-        self.duration = 10
 
         self.currentSprite = ""
         self.image = None
@@ -103,21 +101,6 @@ class npcOrders:
         return order
          # add random order, character (if time LATER, add multiple players w an array to keep track of who had what order)
 
-    def miniTimer(self):
-        if self.startTimer is None:
-            return
-        
-        self.passed = time.time() - self.startTimer
-        self.left = self.duration - self.passed
-        
-        if self.left < 0:
-            pygame.draw.rect(self.screen, (212, 238,241), pygame.Rect(0, 0, 1030, 300))
-            return
-
-        font = pygame.font.SysFont("comicsans", int(30))
-        timerPrint = font.render(str(int(self.left)) + "  ", True, (0,0,0), (212,238,241))
-        self.screen.blit(timerPrint, (960, 30))
-
     def textDisplay(self, text):
         font = pygame.font.SysFont("comicsans", int(30))
         textBreaks = self.breakLines(text, font)
@@ -129,7 +112,7 @@ class npcOrders:
             self.screen.blit(c, (x, y))
             y += 60
 
-        self.startTimer = time.time()
+        # self.startTimer = time.time()
 
     def breakLines(self, text, font):
         chars = len(text)
@@ -220,7 +203,7 @@ class npcOrders:
                         pygame.quit()
                         sys.exit()
 
-            self.miniTimer()
+            # self.miniTimer()
 
                 # add something for resizing the screen
                         
