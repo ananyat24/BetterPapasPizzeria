@@ -158,9 +158,10 @@ class npcOrders:
 
     def spriteSelect(self):
         sprites = ["allanspritesheet_thumbs up.png", "allanspritesheet_angry.png", "berthaspritesheet_happy.png", "berthaspritesheet_angry.png", "joyspritesheet2.png"]
-        r = random.randint(0,3)
+        r = random.randint(0,4)
         self.currentSprite = sprites[r]
         self.image = pygame.image.load(os.path.join("Images", self.currentSprite))
+        self.image = pygame.transform.scale(self.image, (1350, 225))
 
         n = 5
         if self.currentSprite == "joyspritesheet2.png":
@@ -170,12 +171,12 @@ class npcOrders:
 
         w = (self.image.get_width())/n
 
-        self.image = self.image.subsurface((w*3, 0, w, self.image.get_height())).copy()
+        self.image = self.image.subsurface((w*2, 0, w, self.image.get_height())).copy()
         self.image = pygame.transform.scale(self.image, (1.3*self.image.get_width(), 1.3*self.image.get_height()))
 
     def spriteArrival(self):
         x = 450
-        y = 265
+        y = 245
         self.screen.blit(self.image, (x, y))
 
     # def spriteExit(self): # implement if time

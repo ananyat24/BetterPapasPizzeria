@@ -82,7 +82,7 @@ def run():
     clock = pygame.time.Clock()
 
     back = pygame.Rect(1200, 0, 40, 40)
-    screen.blit(pygame.font.SysFont(None, 75).render('<', True, (0, 0, 0)), (1200, 0))
+    screen.blit(pygame.font.SysFont(None, 75).render('<', True, (245,133,110)), (1200, 0))
 
     font = pygame.font.SysFont("Comic Sans MS", 30)
     message = TextScroll(pygame.Rect(50, 50, c.screen_width - 100, c.screen_height - 100), font, (245,133,110), (212, 238, 241), INTRO, ms_per_line=1500)
