@@ -172,7 +172,7 @@ class npcOrders:
         w = (self.image.get_width())/n
 
         self.image = self.image.subsurface((w*2, 0, w, self.image.get_height())).copy()
-        self.image = pygame.transform.scale(self.image, (1.3*self.image.get_width(), 1.3*self.image.get_height()))
+        self.image = pygame.transform.scale(self.image, (int(1.3*self.image.get_width()), int(1.3*self.image.get_height())))
 
     def spriteArrival(self):
         x = 450
