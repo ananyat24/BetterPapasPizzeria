@@ -8,7 +8,7 @@ from intro import run
 
 # create the screen
 pygame.init()
-pygame.font.init() 
+pygame.font.init()
 pygame.font.init() 
 c = Constants()
 screen = pygame.display.set_mode((c.screen_width, c.screen_height))

@@ -30,6 +30,22 @@ class Constants():
         self.pizza_image_location = () # location for pizza in the form (x_pos, y_pos)
         self.lines = [] # lines for cut pizza
         self.topping_boxes = [] # list of tuples in the form (image, location) for all topping containers
+        self.toppings = [] # list of all toppings on the pizza
+        
+        # background images for each chef screen
+        self.chef_cutting_bg = None
+        self.chef_topping_bg = None
+        self.chef_oven_bg = None
+        
+        self.curr_screen_name = None
+        
+        # store the differences in pizza locations for each chef screen
+        self.toppings_to_cutting = (430 - 295, 120 - 120)
+        self.toppings_to_oven = (330 - 295, 140 - 120)
+        self.cutting_to_toppings = (295 - 430, 120 - 120)
+        self.cutting_to_oven = (330 - 430, 140 - 120)
+        
+        # storing order ticket information
         self.VALUES_JSON = {}
         self.VALUES = {}
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "values.json")) as f:
