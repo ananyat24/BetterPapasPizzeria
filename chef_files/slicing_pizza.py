@@ -7,12 +7,8 @@ class SlicingPizza(Chef):
     def __init__(self, screen:pygame.display, num_cuts:int, c:Constants): 
         self.c = c
         self.number_cuts_left = num_cuts
-        self.pizza_image_location = (260, 60)
+        self.pizza_image_location = (430, 120)
         self.background_image = None
-
-        
-        self.curr_toppings = []
-
         
         super().__init__(screen, self.c)
     
@@ -30,7 +26,7 @@ class SlicingPizza(Chef):
             # check if all slices have already been cut
             if self.number_cuts_left > 0:
                 # before drawing the line, erase any lines that may have existed before
-                self.display_current_pizza(self.curr_toppings)
+                self.display_current_pizza()
                 # draw dashed line
                 dash_length = int((x_fin - x_org)/15)
                 slope = (y_fin - y_org) / (x_fin - x_org)
@@ -69,10 +65,10 @@ class SlicingPizza(Chef):
             elif y_curr > self.c.pizza_image_location[1] + height:
                 y_curr = self.c.pizza_image_location[1] + height
             # "erase" the purple cutting line
-            self.display_current_pizza(self.curr_toppings)
+            self.display_current_pizza()
             # draw a line so that it looks like the pizza has been cut
-            self.draw_line_slowly((137,135,135), x_org, y_org, x_curr, y_curr, 8)
-            self.c.lines.append((self.screen, (137,135,135), (x_org, y_org), (x_curr, y_curr), 8))
+            self.draw_line_slowly((129,127,127), x_org, y_org, x_curr, y_curr, 8)
+            self.c.lines.append((self.screen, (129,127,127), (x_org, y_org), (x_curr, y_curr), 8))
     
     
     # drawing the pizza cut line slowly instead of all at once
@@ -103,4 +99,5 @@ class SlicingPizza(Chef):
             pygame.display.update()
         self.screen.blit(self.c.background_image, (0, 0))
         self.screen.blit(self.c.pizza_image, (final_x_coor, self.c.pizza_image_location[1]))
+        self.display_current_pizza()
             

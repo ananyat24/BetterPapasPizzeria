@@ -10,18 +10,46 @@ class Chef:
     
     # show the current pizza (needed for erasing cutting line)
 
-    def display_current_pizza(self, curr_toppings:list):
+    def display_current_pizza(self):
+        
+        # get needed variables from Constants class
+        curr_screen_name = self.c.curr_screen_name
+        curr_toppings = self.c.toppings
+        
         # clear the screen (background + plain pizza displayed)
         self.screen.blit(self.c.background_image, (0, 0))
         self.screen.blit(self.c.pizza_image, (self.c.pizza_image_location[0], self.c.pizza_image_location[1]))
         
+        # check what the current screen is and adjust object positions accordingly
+        if curr_screen_name == "toppings":
+            print("why")
+            x_change_topping = 0
+            y_change_topping = 0
+            x_change_lines = self.c.cutting_to_toppings[0]
+            y_change_lines = self.c.cutting_to_toppings[1]
+        elif curr_screen_name == "cutting":
+            print("true")
+            x_change_topping = self.c.toppings_to_cutting[0]
+            y_change_topping = self.c.toppings_to_cutting[1]
+            x_change_lines = 0
+            y_change_lines = 0
+        else:
+            print("seriously why")
+            x_change_topping = self.c.toppings_to_oven[0]
+            y_change_topping = self.c.toppings_to_oven[1]
+            x_change_lines = self.c.cutting_to_oven[0]
+            y_change_lines = self.c.cutting_to_oven[1]
+        
         # display pizza toppings
         for t in curr_toppings:
-            self.screen.blit(t[0], t[1])
+            new_location = (t[1][0] + x_change_topping, t[1][1] + y_change_topping)
+            self.screen.blit(t[0], new_location)
         
         # display the pizza cuts
         for line in self.c.lines:
-            pygame.draw.line(line[0], line[1], line[2], line[3], line[4])
+            new_line_start = (line[2][0] + x_change_lines, line[2][1] + y_change_lines)
+            new_line_end = (line[3][0] + x_change_lines, line[3][1] + y_change_lines)
+            pygame.draw.line(line[0], line[1], new_line_start, new_line_end, line[4])
             
             
     # add new images to the screen

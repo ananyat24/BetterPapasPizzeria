@@ -9,6 +9,10 @@ class Oven(Chef):
         self.cooking_time = 0  # stores how long the player cooks the pizza for (used for calculating satsifaction at end)
         self.background_image = None
         
+        self.c = c
+        
+        self.pizza_image_location = (330, 140)
+        
         super().__init__(screen, self.c)
         
         
@@ -20,7 +24,7 @@ class Oven(Chef):
         
     # place the pizza on the oven
     def pizza_fly_in(self):
-        self.c.pizza_image_location = (600, 380)
+        self.c.pizza_image_location = self.pizza_image_location
         final_x_coor = self.c.pizza_image_location[0]
         for x_coor in range(0, final_x_coor, 20):
             self.screen.blit(self.c.background_image, (0, 0))
@@ -28,5 +32,5 @@ class Oven(Chef):
             pygame.display.update()
         self.screen.blit(self.c.background_image, (0, 0))
         self.screen.blit(self.c.pizza_image, (final_x_coor, self.c.pizza_image_location[1]))
-        self.display_current_pizza(self.c.topping_boxes)
+        self.display_current_pizza()
     

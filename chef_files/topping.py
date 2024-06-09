@@ -7,8 +7,8 @@ class Topping():
         self.one_topping_image = pygame.transform.scale(one_topping_img, (30, 30))
         
         self.location = location # tuple in the form (x_coordinate, y_coordinate) for top left corner of topping box
-        self.width = 100 # same for each topping box
-        self.height = 100 # same for each topping boxs
+        self.width = 150 # same for each topping box
+        self.height = 150 # same for each topping boxs
         self.rect = pygame.Rect(self.location, (self.width, self.height))
         
         self.screen = screen
