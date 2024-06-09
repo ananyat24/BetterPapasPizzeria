@@ -458,7 +458,8 @@ class orderOptions:
                         json_to_send = self.onComplete() # send ticket to chef
                         data = {"stage": "in_level", "role": "waiter", "to_send_to_chef" : {"receipt": json_to_send, "receipt score" : None}, "to_send_to_waiter": None}
                         # print(data)
-                        data = n.send(data)
+                        d = network.Network()
+                        data = d.send(data)
 
                         o = npcOrders.npcOrders()
                         self.setup()
