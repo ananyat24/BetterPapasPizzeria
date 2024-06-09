@@ -63,11 +63,11 @@ and make Papa and the customers satisfied!
 The two roles are Chef, and Waiter. Only one player can be in a role at a time. 
 The Waiter will take orders manually, by clicking on the order form to update numbers 
 of certain ingredients, time to bake, and slices cut.
-The Chef will then take the order form and place toppings, bake, and cut the pizza accordingly. 
+The Chef will take the order form and place toppings, bake, and cut the pizza accordingly. 
 The pizza is then handed to the customer.
 
-The goal of this game is to get high satisfaction scores from our customers, by working efficiently 
-and collaboratively.
+The goal of this game is to get high satisfaction scores from our customers, by working 
+efficiently and collaboratively.
 
 After all, at Papa Louie's Pizzeria, Your Satisfaction is Our Priority!
 
@@ -78,10 +78,14 @@ def run():
     os.environ['SDL_VIDEO_WINDOW_POS'] = "1560, 100"
     pygame.init()
     screen = pygame.display.set_mode((c.screen_width, c.screen_height))
+    screen.fill((212, 238, 241))
     clock = pygame.time.Clock()
 
+    back = pygame.Rect(1200, 0, 40, 40)
+    screen.blit(pygame.font.SysFont(None, 75).render('<', True, (0, 0, 0)), (1200, 0))
+
     font = pygame.font.SysFont("Comic Sans MS", 30)
-    message = TextScroll(pygame.Rect(50, 50, c.screen_width - 100, c.screen_height - 100), font, YELLOW, BLACK, INTRO, ms_per_line=1500)
+    message = TextScroll(pygame.Rect(50, 50, c.screen_width - 100, c.screen_height - 100), font, (245,133,110), (212, 238, 241), INTRO, ms_per_line=1500)
 
     time_passed = time.time()
     while True:
@@ -90,6 +94,13 @@ def run():
                 loop = False
                 pygame.quit()
                 sys.exit(0)
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and back.collidepoint(pygame.mouse.get_pos()):
+                import main
+                with open('main.py') as file:
+                    exec(file.read())
+
+
         else:
             # screen.fill(pygame.color.Color('black'))
             message.update()

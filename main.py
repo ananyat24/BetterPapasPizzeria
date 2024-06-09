@@ -63,9 +63,10 @@ while gameloop:
             
             screen.blit(homescreen_image, (0,0))
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if intro_instructions_btn.collidepoint(pygame.mouse.get_pos()):
+                if intro_tutorial_btn.collidepoint(pygame.mouse.get_pos()):
                     data["stage"] = "instructions"
                     run()
+                    data["stage"] = "intro"
             pygame.display.update()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
