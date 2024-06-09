@@ -1,5 +1,9 @@
 # BetterPapasPizzeria
 
+## To Run 
+- Run "server.py" in dedicated terminal
+- Run "main.py" in dedicated terminal
+
 How does the game work
 
 Chef Levels
