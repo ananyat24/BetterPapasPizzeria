@@ -7,18 +7,18 @@ import npcOrders
 import time
 
 class orderOptions:
-    def __init__(self):
+    def __init__(self, screen=None):
         pygame.init()
 
         # change to constants in class
         self.c = Constants()
         self.WIDTH = self.c.screen_width
         self.HEIGHT = self.c.screen_height
-
-        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
         
-        self.screen.fill((0, 0, 0))
-        pygame.display.set_caption("order taking")
+        if screen:
+            self.screen = screen
+        else:
+            self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
 
         self.TA1count = 0
         self.TA2count = 0
@@ -84,6 +84,9 @@ class orderOptions:
         # pygame.draw.rect(self.screen, (255, 255, 255), pygame.Rect(self.completeButton), 10)
 
     def setup(self):
+        self.screen.fill((0, 0, 0))
+        pygame.display.set_caption("order taking")
+        
         self.bg = pygame.image.load(os.path.join("background images", "waiter backgrounds", "Waiter - Cashier BG.png"))
         self.bg = pygame.transform.scale(self.bg, (self.WIDTH, self.HEIGHT))
         self.screen.blit(self.bg, (0, 0))
@@ -515,4 +518,4 @@ class orderOptions:
 
 if __name__ == "__main__":
     c = orderOptions()
-    c.run()
+    c.run(0, 0)

@@ -5,28 +5,31 @@ import sys
 import order_options
 
 class orderTicketFill:
-    def __init__(self):
+    def __init__(self, screen=None):
         pygame.init()
 
         # change to constants in class
         self.c = Constants()
         self.WIDTH = self.c.screen_width
         self.HEIGHT = self.c.screen_height
-
-        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
         
-        self.screen.fill((0, 0, 0))
-        pygame.display.set_caption("order ticket filling (for chef)")
-
-        self.order = order_options.orderOptions()
+        if screen:
+            self.screen = screen
+        else:
+            self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT), pygame.RESIZABLE)
 
         c = Constants()
         self.values = c.ticketLoad()
         self.valueList = list(self.values.values())
+        
+        self.order = order_options.orderOptions(screen)
         # print (self.values)
 
     # delete later
     def setup(self):
+        self.screen.fill((0, 0, 0))
+        pygame.display.set_caption("order ticket filling (for chef)")
+        
         self.bg = pygame.image.load(os.path.join("background images", "kitchen backgrounds", "Kitchen - Order BG.png"))
         self.bg = pygame.transform.scale(self.bg, (self.WIDTH, self.HEIGHT))
         self.screen.blit(self.bg, (0, 0))

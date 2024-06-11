@@ -28,6 +28,8 @@ class Chef():
         # setup data network for connection between chef and waiter
         self.data = {"stage": "in_level", "role": "chef", "to_send_to_chef": None, "to_send_to_waiter": None}
         
+        self.run()
+        
 
     def setup(self):
         self.screen = pygame.display.set_mode((self.c.screen_width, self.c.screen_height))
@@ -52,24 +54,27 @@ class Chef():
         self.right_middle_button = pygame.Rect((720, 695, 70, 220))
         
         # fill out the order ticket
-        self.order_ticket = orderTicketFill()
+        self.order_ticket = orderTicketFill(self.screen)
 
 
-    def run(self, n):   
+    def run(self):   
         self.setup()
+        
+        self.order_ticket.run()
 
         # gameloop
         while self.gameloop:
             
+            """
             self.data = n.send(self.data)
-            
             most_recent_ticket = self.data["to_send_to_chef"]
-
+            
             # if there is a ticket, display it on the chef screen
             if(most_recent_ticket):
-                self.c.VALUES = most_recent_ticket
                 self.c.VALUES_JSON = most_recent_ticket
                 self.order_ticket.run()
+                
+            """
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -140,3 +145,6 @@ class Chef():
             pygame.display.update()
 
         pygame.quit()
+        
+        
+chef = Chef()
