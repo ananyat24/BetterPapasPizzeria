@@ -9,7 +9,7 @@ from intro import run
 # create the screen
 pygame.init()
 pygame.font.init()
-pygame.font.init() 
+pygame.font.init()
 c = Constants()
 screen = pygame.display.set_mode((c.screen_width, c.screen_height))
 homescreen_image = pygame.image.load("background images/Homescreen.png")
@@ -120,7 +120,7 @@ while gameloop:
                 waiter.run(n, data)
 
         elif data["stage"] == "chef1":
-                chef.run(n, data)
+                chef.run(n)
         else:
             screen.blit(homescreen_image, (0, 0))
             pygame.display.update()

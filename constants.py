@@ -21,10 +21,6 @@ class Constants():
         self.background_image = None
 
         self.playerNumber = 1
-
-        self.HOST_IP = socket.gethostbyname('localhost') #replace 'localhost' with socket.gethostname() for other laptops
-        self.HOST_PORT = 12345
-        self.ENCODER = 'utf-8'
         
         self.pizza_image = None # image for whole pizza
         self.pizza_image_location = () # location for pizza in the form (x_pos, y_pos)

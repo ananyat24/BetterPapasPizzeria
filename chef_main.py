@@ -25,6 +25,9 @@ class Chef():
         # variables for baking pizza
         self.oven_button_clicked = False
         
+        # setup data network for connection between chef and waiter
+        self.data = {"stage": "in_level", "role": "chef", "to_send_to_chef": None, "to_send_to_waiter": None}
+        
 
     def setup(self):
         self.screen = pygame.display.set_mode((self.c.screen_width, self.c.screen_height))
@@ -47,21 +50,26 @@ class Chef():
         # initialize the buttons on the bottom of each screen
         self.left_middle_button = pygame.Rect((450, 690, 70, 220))
         self.right_middle_button = pygame.Rect((720, 695, 70, 220))
+        
+        # fill out the order ticket
+        self.order_ticket = orderTicketFill()
 
 
-    def run(self, n, data):   
+    def run(self, n):   
         self.setup()
-        data = {"stage": "in_level", "role": "chef", "to_send_to_chef": None, "to_send_to_waiter": None}
-        data = n.send(data)
-        print(data) # for testing can remove
-
-        most_recent_ticket = data["to_send_to_chef"]
-        # if(most_recent_ticket):
-            #there is a ticket then do stuff with it here and uncomment this line
 
         # gameloop
-        
         while self.gameloop:
+            
+            self.data = n.send(self.data)
+            
+            most_recent_ticket = self.data["to_send_to_chef"]
+
+            # if there is a ticket, display it on the chef screen
+            if(most_recent_ticket):
+                self.c.VALUES = most_recent_ticket
+                self.c.VALUES_JSON = most_recent_ticket
+                self.order_ticket.run()
             
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

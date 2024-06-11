@@ -87,6 +87,9 @@ class SlicingPizza(Chef):
                 pygame.time.wait(50)
             # since 1 cut has been made, decrease the number of cuts left by 1
             self.number_cuts_left -= 1
+            if self.number_cuts_left == 0:
+                # add switch to satisfaction score screen here
+                pass
             
             
     # have the pizza fly in before the cutting process starts
