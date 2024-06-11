@@ -1,0 +1,54 @@
+import pygame
+import datetime
+import math
+import order_options
+
+pygame.init()
+        
+# intialize all the variables
+gameloop = True
+
+screen = pygame.display.set_mode((1000, 800))
+
+while gameloop:
+
+    for event in pygame.event.get():
+        pass
+    
+    
+    
+    pygame.display.update()
+
+pygame.quit()
+
+def polar_to_cartesian(r, theta):
+        x = int(r * math.cos(math.pi * theta / 180))
+        y = int(r * math.sin(math.pi * theta / 180))
+        adjusted_x = int(1000/2) - 200 + 65 + x
+        adjusted_y = int(550 + 55 - y)
+        print("x" + str(adjusted_x))
+        print("y" + str(adjusted_y))
+        return (adjusted_x, adjusted_y)
+    
+def start_timer():
+    #current_time = datetime.datetime.now()
+        
+    clock_stopped = False
+     
+    oven_clock_button = pygame.Rect((200, 50, 940, 0))
+       
+    while not clock_stopped:
+        order_options.orderOptions.miniTimer()
+        """
+        pygame.time.wait(500)
+        second = current_time.second
+        r = 55
+        adjusted_theta = 90 - (second * 60)
+        #self.screen.blit(self.hand_image, self.polar_to_cartesian(r, adjusted_theta))
+        pygame.draw.line(screen, (0, 0, 0), (int(500) - 200 + 65, 605), polar_to_cartesian(r, adjusted_theta), 7)
+        pygame.display.update()
+        """
+        if oven_clock_button.collidepoint(pygame.mouse.get_pos()):
+            clock_stopped = True
+        
+    pygame.time.wait(500)

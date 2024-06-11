@@ -13,6 +13,7 @@ class Chef:
     def display_current_pizza(self):
         
         # get needed variables from Constants class
+        print(len(self.c.lines))
         curr_screen_name = self.c.curr_screen_name
         curr_toppings = self.c.toppings
         
@@ -22,23 +23,20 @@ class Chef:
         
         # check what the current screen is and adjust object positions accordingly
         if curr_screen_name == "toppings":
-            print("why")
             x_change_topping = 0
             y_change_topping = 0
             x_change_lines = self.c.cutting_to_toppings[0]
             y_change_lines = self.c.cutting_to_toppings[1]
-        elif curr_screen_name == "cutting":
-            print("true")
-            x_change_topping = self.c.toppings_to_cutting[0]
-            y_change_topping = self.c.toppings_to_cutting[1]
-            x_change_lines = 0
-            y_change_lines = 0
-        else:
-            print("seriously why")
+        elif curr_screen_name == "oven":
             x_change_topping = self.c.toppings_to_oven[0]
             y_change_topping = self.c.toppings_to_oven[1]
             x_change_lines = self.c.cutting_to_oven[0]
             y_change_lines = self.c.cutting_to_oven[1]
+        else:
+            x_change_topping = self.c.toppings_to_cutting[0]
+            y_change_topping = self.c.toppings_to_cutting[1]
+            x_change_lines = 0
+            y_change_lines = 0
         
         # display pizza toppings
         for t in curr_toppings:

@@ -16,10 +16,11 @@ class Topping():
     
     
     # drag the topping from the container to the pizza
-    def topping_follow_cursor(self, current_toppings:list):
+    def topping_follow_cursor(self, current_toppings:list, order_ticket):
         # clear screen first
         self.screen.blit(self.c.background_image, (0, 0))
         self.screen.blit(self.c.pizza_image, (self.c.pizza_image_location[0], self.c.pizza_image_location[1]))
+        order_ticket.run()
         
         for t in current_toppings:
             self.screen.blit(t[0], t[1])

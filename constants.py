@@ -22,6 +22,8 @@ class Constants():
 
         self.playerNumber = 1
         
+        self.angles = []
+        
         self.pizza_image = None # image for whole pizza
         self.pizza_image_location = () # location for pizza in the form (x_pos, y_pos)
         self.lines = [] # lines for cut pizza

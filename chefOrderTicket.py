@@ -106,8 +106,8 @@ class orderTicketFill:
     def fillSlices (self):
         click = self.valueList[21]
 
-        self.order.sliceArea.x = self.order.sliceArea.x + 4
-        self.order.sliceArea.y = self.order.sliceArea.y + 3
+        self.order.sliceArea.x = self.order.sliceArea.x
+        self.order.sliceArea.y = self.order.sliceArea.y
         
         if click != 0:
             click %= 4
@@ -116,8 +116,8 @@ class orderTicketFill:
     def fillTimer (self):
         click = self.valueList[22]
 
-        self.order.timerArea.x = self.order.timerArea.x + 4
-        self.order.timerArea.y = self.order.timerArea.y + 3
+        self.order.timerArea.x = self.order.timerArea.x
+        self.order.timerArea.y = self.order.timerArea.y
         
         if click != 0:
             click %= 4
@@ -129,7 +129,8 @@ class orderTicketFill:
         self.fillMultiplier()
         self.fillSlices()
         self.fillTimer()
-
+        
+        """
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -142,6 +143,7 @@ class orderTicketFill:
                         sys.exit()
 
             pygame.display.flip()
+        """
 
 if __name__ == "__main__":
     o = orderTicketFill()

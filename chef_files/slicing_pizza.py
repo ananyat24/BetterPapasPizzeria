@@ -1,14 +1,19 @@
 import pygame
 from chef_files.chef import Chef
 from constants import Constants
+from chef_files.satisfaction_score import SatisfactionScore
 
 class SlicingPizza(Chef):
     
-    def __init__(self, screen:pygame.display, num_cuts:int, c:Constants): 
+    def __init__(self, screen:pygame.display, num_cuts:int, c:Constants, order_ticket): 
         self.c = c
         self.number_cuts_left = num_cuts
         self.pizza_image_location = (430, 120)
         self.background_image = None
+        
+        self.order_ticket = order_ticket
+        
+        self.satisfaction_score = SatisfactionScore(screen, self.c)
         
         super().__init__(screen, self.c)
     
@@ -17,16 +22,19 @@ class SlicingPizza(Chef):
     def bg_to_cutting_board(self):
         self.background_image = self.change_background("background images/kitchen backgrounds/Kitchen - Order BG.png")
         self.pizza_fly_in()
+        self.satisfaction_score.num_cuts = self.number_cuts_left
         
     
     # show the line when cutting the pizza
-    def display_cutting_line(self, x_org:int, y_org:int):
+    def display_cutting_line(self, x_org:int, y_org:int, order_ticket):
         x_fin, y_fin = pygame.mouse.get_pos()
         if x_org != x_fin:
             # check if all slices have already been cut
             if self.number_cuts_left > 0:
                 # before drawing the line, erase any lines that may have existed before
                 self.display_current_pizza()
+                self.order_ticket = order_ticket
+                self.order_ticket.run()
                 # draw dashed line
                 dash_length = int((x_fin - x_org)/15)
                 slope = (y_fin - y_org) / (x_fin - x_org)
@@ -37,6 +45,10 @@ class SlicingPizza(Chef):
                     x_fin = x_start + dash_length
                     y_fin = int(x_fin * slope) + b
                     pygame.draw.line(self.screen, (195,177,225), (x_start, y_start), (x_fin, y_fin), 8)
+        """
+        if self.number_cuts_left - 1 == 0:
+            self.c.lines.append((self.screen, (129,127,127), (x_org, y_org), (x_fin, y_fin), 8))
+        """
     
     
     # show the cut pizza slices
@@ -66,6 +78,7 @@ class SlicingPizza(Chef):
                 y_curr = self.c.pizza_image_location[1] + height
             # "erase" the purple cutting line
             self.display_current_pizza()
+            self.order_ticket.run()
             # draw a line so that it looks like the pizza has been cut
             self.draw_line_slowly((129,127,127), x_org, y_org, x_curr, y_curr, 8)
             self.c.lines.append((self.screen, (129,127,127), (x_org, y_org), (x_curr, y_curr), 8))
@@ -76,6 +89,7 @@ class SlicingPizza(Chef):
         if x_org != x_fin:
             interval = (x_fin - x_org)/10
             slope = (y_fin - y_org) / (x_fin - x_org)
+            self.c.angles.append(slope)
             b = y_org - slope * x_org
             for i in range(10):
                 x_start = x_org + (i) * interval
@@ -87,9 +101,11 @@ class SlicingPizza(Chef):
                 pygame.time.wait(50)
             # since 1 cut has been made, decrease the number of cuts left by 1
             self.number_cuts_left -= 1
+            """
             if self.number_cuts_left == 0:
-                # add switch to satisfaction score screen here
-                pass
+                print("cuts" + str(len(self.c.lines)))
+                self.satisfaction_score.bg_to_complete_pizza()
+            """
             
             
     # have the pizza fly in before the cutting process starts
